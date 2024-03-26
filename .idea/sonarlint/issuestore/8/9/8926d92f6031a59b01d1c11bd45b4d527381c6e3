@@ -1,0 +1,30 @@
+
+upython:S117"WRename this parameter "ContextInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(ƒÖÛ–8ÏÜ…õÜ1
+Bpython:S125"Remove this commented out code.(Æ¦¦»şÿÿÿÿ8ÏÜ…õÜ1
+zpython:S117+"WRename this parameter "ContextInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(£ÔµÃûÿÿÿÿ8ÏÜ…õÜ1
+python:S117¶"`Rename this local variable "Recent_Drawdown" to match the regular expression ^[_a-z][a-z0-9_]*$.(¯Œšö8ÏÜ…õÜ1
+{python:S117N"]Rename this local variable "c_HoldCircle" to match the regular expression ^[_a-z][a-z0-9_]*$.(µœ÷ì8ÏÜ…õÜ1
+…python:S117I"bRename this local variable "hs300c_HoldCircle" to match the regular expression ^[_a-z][a-z0-9_]*$.(šêËØıÿÿÿÿ8ÏÜ…õÜ1
+Lpython:S1481×",Remove the unused local variable "wintimes".(ö—‚¥8ÏÜ…õÜ1
+Rpython:S14813".Remove the unused local variable "investment".(£ù˜›üÿÿÿÿ8ÏÜ…õÜ1
+Kpython:S1481z"'Remove the unused local variable "m30".(Ò¬Òşÿÿÿÿ8ÏÜ…õÜ1
+Qpython:S1481È"1Remove the unused local variable "average_hegde".(÷Şõ½8ÏÜ…õÜ1
+Fpython:S1481|"'Remove the unused local variable "m10".(ËøÅØ8ÏÜ…õÜ1
+Mpython:S1481<")Remove the unused local variable "count".(óÿÑ—øÿÿÿÿ8ÏÜ…õÜ1
+Gpython:S1481§"'Remove the unused local variable "BYL".(˜‰˜¿8ÏÜ…õÜ1
+Hpython:S14812")Remove the unused local variable "money".(’¼°š8ÏÜ…õÜ1
+xpython:S3776+"TRefactor this function to reduce its Cognitive Complexity from 44 to the 15 allowed.(£ÔµÃûÿÿÿÿ8ÏÜ…õÜ1
+=python:S125@"Remove this commented out code.(Ş‚8ÏÜ…õÜ1
+Bpython:S125u"Remove this commented out code.(Šõü‡ÿÿÿÿÿ8ĞÜ…õÜ1
+>python:S125†"Remove this commented out code.(èú×š8ĞÜ…õÜ1
+Cpython:S125Œ"Remove this commented out code.(£æó‚øÿÿÿÿ8ĞÜ…õÜ1
+Cpython:S125Ÿ"Remove this commented out code.(µÒó¿şÿÿÿÿ8ĞÜ…õÜ1
+Cpython:S125¡"Remove this commented out code.(´ş¯çÿÿÿÿÿ8ĞÜ…õÜ1
+Cpython:S125¤"Remove this commented out code.(‰˜Úüÿÿÿÿ8ĞÜ…õÜ1
+=python:S125ª"Remove this commented out code.(½ÉØ8ĞÜ…õÜ1
+>python:S125­"Remove this commented out code.(¥²˜Å8ĞÜ…õÜ1
+>python:S125¿"Remove this commented out code.(§ø’û8ĞÜ…õÜ1
+>python:S125Ã"Remove this commented out code.(¡™àà8ĞÜ…õÜ1
+Cpython:S125Ø"Remove this commented out code.(ƒ‹ÎÚûÿÿÿÿ8ĞÜ…õÜ1
+ypython:S117à"ZRename this local variable "timeArray" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ó¼¾À8ĞÜ…õÜ1
+rpython:S1542ä"RRename function "DateInterval" to match the regular expression ^[a-z_][a-z0-9_]*$.(±æØæ8ĞÜ…õÜ1

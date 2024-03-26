@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TCStageLayout>
+    <control note="控件">
+        <variable note="控件">
+            <item bind="base_buy_price" name="买入基准价格" note="买入基准（委托一）价格" value="12.00" type="intput"/>
+            <item bind="base_sell_price" name="卖出基准价格" note="卖出基准（委托一）价格" value="12.2" type="intput"/>
+            <item bind="min_buy_price" name="委买最低价" note="委买的最低价格" value="10.50" type="intput"/>
+            <item bind="max_sell_price" name="委卖最高价" note="委卖的最高价格" value="12.5" type="intput"/>
+            <item bind="min_buy_singlevolume" name="委买-单向笔数" note="委买-单向笔数" value="3" type="intput"/>
+            <item bind="max_sell_singlevolume" name="委卖-单向笔数" note="委卖-单向笔数" value="3" type="intput"/>
+            <item bind="min_buy_volume" name="委买-单笔股数" note="委买-单笔股数" value="1000" type="intput"/>
+            <item bind="max_sell_volume" name="委卖-单笔股数" note="委卖-单笔股数" value="1000" type="intput"/>
+            <item bind="grid_interval" name="网格间距" note="网格间距" value="0.1" type="intput"/>
+            <item bind="reference_price" name="基准差价" note="基准差价" value="0.1" type="intput"/>
+            <item bind="max_warp" name="最大买卖笔数偏差" note="最大买卖成交笔数偏差，如果超过则对成交多的方向的委托撤单" value="3" type="intput"/>
+            <item bind="end_restore" name="结束前仓位复原" note="是否在收盘前恢复当日持仓，默认为True" value="True" type="checkBox"/>
+            <item bind="position_back_time" name="仓位复原时间" note="收盘前恢复当日持仓的具体时间，默认为145000" value="14:50:00" type="intput"/>
+            <item list="对手价,最新价,卖一价,买一价" bind="back_price_type" comboType="price" name="仓位复原报价方式" note="收盘前恢复当日持仓的下单选价类型。默认为对手价" value="对手价" type="combo"/>
+        </variable>
+    </control>
+</TCStageLayout>

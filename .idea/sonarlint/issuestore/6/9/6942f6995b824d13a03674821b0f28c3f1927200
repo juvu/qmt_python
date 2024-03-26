@@ -1,0 +1,58 @@
+
+upython:S1192Á"PDefine a constant instead of duplicating this literal 'æœ€æ–°æ¶¨è·Œå¹…' 3 times.(³çÛšùÿÿÿÿ8¹µ‡ã1
+Lpython:S1481Z"-Remove the unused local variable "item_json".(†­£§8”â¹ã1
+rpython:S1854z"NRemove this assignment to local variable 'm_nVolume'; the value is never used.(˜ìíüÿÿÿÿ8¹µ‡ã1
+vpython:S1854w"XRemove this assignment to local variable 'm_strInstrumentName'; the value is never used.(›¢L8ºµ‡ã1
+zpython:S1854v"VRemove this assignment to local variable 'm_strInstrumentID'; the value is never used.(×á¾ıÿÿÿÿ8ºµ‡ã1
+wpython:S1854o"XRemove this assignment to local variable 'm_strInstrumentName'; the value is never used.(áöæı8ºµ‡ã1
+upython:S1854n"VRemove this assignment to local variable 'm_strInstrumentID'; the value is never used.(÷˜÷í8ºµ‡ã1
+‚python:S117†"cRename this local variable "m_dInstrumentValue" to match the regular expression ^[_a-z][a-z0-9_]*$.(»ä™¼8ºµ‡ã1
+|python:S117…"]Rename this local variable "m_dOpenPrice" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÉÒ ‹8ºµ‡ã1
+„python:S117‡"`Rename this local variable "m_dPositionCost" to match the regular expression ^[_a-z][a-z0-9_]*$.(”ìÌ¶üÿÿÿÿ8ºµ‡ã1
+†python:S117ˆ"bRename this local variable "m_dPositionProfit" to match the regular expression ^[_a-z][a-z0-9_]*$.(ø®ìÔùÿÿÿÿ8ºµ‡ã1
+wpython:S117y"YRename this local variable "m_dPrice" to match the regular expression ^[_a-z][a-z0-9_]*$.(ò‹ú°8ºµ‡ã1
+‚python:S117t"_Rename this local variable "m_dTradeAmount" to match the regular expression ^[_a-z][a-z0-9_]*$.(èò™¨ıÿÿÿÿ8ºµ‡ã1
+}python:S117r"_Rename this local variable "m_dTradedPrice" to match the regular expression ^[_a-z][a-z0-9_]*$.(çÄ„8ºµ‡ã1
+„python:S117„"`Rename this local variable "m_nCanUseVolume" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ö„Õşşÿÿÿÿ8ºµ‡ã1
+python:S117p"^Rename this local variable "m_nOffsetFlag" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ó¾‘…ÿÿÿÿÿ8ºµ‡ã1
+}python:S117z"ZRename this local variable "m_nVolume" to match the regular expression ^[_a-z][a-z0-9_]*$.(˜ìíüÿÿÿÿ8ºµ‡ã1
+Špython:S117q"gRename this local variable "m_nVolumeTotalOriginal" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ìº´’øÿÿÿÿ8ºµ‡ã1
+~python:S117s"`Rename this local variable "m_nVolumeTraded" to match the regular expression ^[_a-z][a-z0-9_]*$.(…‹Ü¡8ºµ‡ã1
+€python:S117n"bRename this local variable "m_strInstrumentID" to match the regular expression ^[_a-z][a-z0-9_]*$.(÷˜÷í8ºµ‡ã1
+‚python:S117o"dRename this local variable "m_strInstrumentName" to match the regular expression ^[_a-z][a-z0-9_]*$.(áöæı8»µ‡ã1
+Zpython:S1481ˆ"5Remove the unused local variable "m_dPositionProfit".(ø®ìÔùÿÿÿÿ8»µ‡ã1
+Ppython:S1481…"0Remove the unused local variable "m_dOpenPrice".(ÉÒ ‹8»µ‡ã1
+^python:S1481q":Remove the unused local variable "m_nVolumeTotalOriginal".(Ìº´’øÿÿÿÿ8»µ‡ã1
+Kpython:S1481y",Remove the unused local variable "m_dPrice".(ò‹ú°8»µ‡ã1
+Rpython:S1481s"3Remove the unused local variable "m_nVolumeTraded".(…‹Ü¡8»µ‡ã1
+Xpython:S1481„"3Remove the unused local variable "m_nCanUseVolume".(Ö„Õşşÿÿÿÿ8»µ‡ã1
+Xpython:S1481‡"3Remove the unused local variable "m_dPositionCost".(”ìÌ¶üÿÿÿÿ8»µ‡ã1
+Vpython:S1481†"6Remove the unused local variable "m_dInstrumentValue".(»ä™¼8»µ‡ã1
+Qpython:S1481r"2Remove the unused local variable "m_dTradedPrice".(çÄ„8»µ‡ã1
+Vpython:S1481t"2Remove the unused local variable "m_dTradeAmount".(èò™¨ıÿÿÿÿ8»µ‡ã1
+Upython:S1481p"1Remove the unused local variable "m_nOffsetFlag".(Ó¾‘…ÿÿÿÿÿ8»µ‡ã1
+Rpython:S1481š"-Remove the unused local variable "character".(Ğ Æşÿÿÿÿ8»µ‡ã1
+Rpython:S1481Û"-Remove the unused local variable "code_info".(ŠšÍ‚ıÿÿÿÿ8»µ‡ã1
+Mpython:S5603½"(Remove this unused function declaration.(´‰àÀıÿÿÿÿ8»µ‡ã1
+Ypython:S905Æ":Remove or refactor this statement; it has no side effects.(ƒû¬÷8»µ‡ã1
+>python:S125Ô"Remove this commented out code.(€öÏÕ8»µ‡ã1
+Vpython:S1481ğ"1Remove the unused local variable "res_code_list".(³´Ü¼ÿÿÿÿÿ8»µ‡ã1
+Cpython:S125ñ"Remove this commented out code.(†´Âœøÿÿÿÿ8»µ‡ã1
+Vpython:S1481ÿ"1Remove the unused local variable "res_code_list".(³´Ü¼ÿÿÿÿÿ8»µ‡ã1
+Cpython:S125€"Remove this commented out code.(†´Âœøÿÿÿÿ8¼µ‡ã1
+ypython:S3776†"TRefactor this function to reduce its Cognitive Complexity from 25 to the 15 allowed.(Ğ¼†üÿÿÿÿ8¼µ‡ã1
+>python:S125®"Remove this commented out code.(Ø—¿8¼µ‡ã1
+>python:S125½"Remove this commented out code.( ËØÄ8¼µ‡ã1
+{python:S1186À"[Add a nested comment explaining why this function is empty, or complete the implementation.(¬„ı8¼µ‡ã1
+zpython:S1186Ä"[Add a nested comment explaining why this function is empty, or complete the implementation.(ªËÊ48¼µ‡ã1
+vpython:S1542È"VRename function "brain_analyse_BX" to match the regular expression ^[a-z_][a-z0-9_]*$.(²»Èœ8¼µ‡ã1
+{python:S1542Ï"VRename function "brain_analyse_CY" to match the regular expression ^[a-z_][a-z0-9_]*$.(ÒÄ¿şûÿÿÿÿ8¼µ‡ã1
+vpython:S1542Ö"VRename function "brain_analyse_SH" to match the regular expression ^[a-z_][a-z0-9_]*$.(ûÅ¦„8¼µ‡ã1
+>python:S125ñ"Remove this commented out code.(Å¬¥È8¼µ‡ã1
+>python:S125Š"Remove this commented out code.(ÊÃ€É8¼µ‡ã1
+Qpython:S1481±",Remove the unused local variable "response".(¬ı½Ôıÿÿÿÿ8¼µ‡ã1
+npython:S1542Ğ"NRename function "myServer" to match the regular expression ^[a-z_][a-z0-9_]*$.(¯‰8½µ‡ã1
+tpython:S1542Ş"ORename function "myAnalyse" to match the regular expression ^[a-z_][a-z0-9_]*$.(îÒ“åûÿÿÿÿ8½µ‡ã1
+Cpython:S125ì"Remove this commented out code.(ù‚ÊÛúÿÿÿÿ8½µ‡ã1
+Cpython:S125ñ"Remove this commented out code.(É±–åşÿÿÿÿ8½µ‡ã1
+Cpython:S125ş"Remove this commented out code.(›Ñô•üÿÿÿÿ8½µ‡ã1

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TCStageLayout>
+    <control note="控件">
+        <variable note="控件">
+            <item note="设置尾盘逆回购时间" value="100000" isuse="1" name="逆回购时间" type="intput" bind="end_time"/>
+            <item note="最新价利率最小值" value="1.0" isuse="1" name="最小利率" type="intput" bind="min_price"/>
+            <item note="委托价格类型" value="最新价" isuse="1" name="委托价格类型" list="对手价,最新价,卖一价,买一价" comboType="price" type="combo" bind="price_type"/>
+            
+        </variable>
+    </control>
+</TCStageLayout>
