@@ -157,7 +157,7 @@ def wencai_():
             stock_info['最新价']
             stock_info['最新涨跌幅']
 
-        res.apply(get_code_info, axis=1)
+        if 'apply' in dir(res): res.apply(get_code_info, axis=1)
         res_list = res.to_dict(orient='records')
         res_code_list = [i['股票代码'] for i in res_list]
         # for i in res_code_list:
@@ -205,7 +205,7 @@ def wencai_():
         time1 = time(9, 10)
         time2 = time(11, 30)
         time3 = time(13, 0)
-        time4 = time(15, 20)
+        time4 = time(15, 10)
         if time1 <= current_time <= time2 or time3 <= current_time <= time4:            # 程序9.10分-11.30分,13.00-15.00运行时间
         # if True:            # 程序9.10分-11.30分,13.00-15.00运行时间
             for ideal in ideals:
