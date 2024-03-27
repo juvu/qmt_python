@@ -102,7 +102,7 @@ def wencai_():
         """
         print_(ideal)
 
-        # 回忆：都数据库中取出数据，然后分析
+        # 回忆：都数据库中取出数据,然后分析
         # 读redis或者es然后分析
         code_list = []
         def get_code_info(stock_info):
@@ -136,7 +136,7 @@ def wencai_():
          # print_(pd.merge(res['barline3'], res['历史主力资金流向']['barline3']))
             code_list.append(stock_info['code'])
 
-        res.apply(get_code_info, axis=1)
+        if 'apply' in dir(res): res.apply(get_code_info, axis=1)
         print_(code_list)
         # res_list = res.to_dict(orient='records')
         # res_code_list = [i['股票代码'] for i in res_list]
@@ -146,7 +146,7 @@ def wencai_():
     def brain_think_ascending_channel(res, ideal):
         """
         上升通道
-        散户会有很多散户持有一个股票，出现一个股票多个散户持有是正常的情况
+        散户会有很多散户持有一个股票,出现一个股票多个散户持有是正常的情况
         """
         print_('上升通道')
         print_(ideal)
@@ -167,7 +167,7 @@ def wencai_():
     def brain_think_private_investor(res, ideal):
         """
         分析散户
-        散户会有很多散户持有一个股票，出现一个股票多个散户持有是正常的情况
+        散户会有很多散户持有一个股票,出现一个股票多个散户持有是正常的情况
         """
         print_('分析散户')
         print_(ideal)
@@ -184,28 +184,30 @@ def wencai_():
     while True:
         if start_time <= current_time <= end_time:
             ideals = ['9:20之前的竞价出现涨跌停价挂单加分,剔除ST',
-                      '9:20~9:25期间，撮合价格逐步走高，同时伴随着成交量的放大，且以密集红柱为主。最好在最后一两分钟内 有快速拉高(大资金强吃货)，且最终竞价涨幅在3%~7%之间',
-                      '9:30前，有巨单挂过涨跌停价,个股形态完好，前几日分时有过异动或者有过涨停,开始股价涨停 ，竞价过程中撮合价格慢慢走低，但成交量有效放大，并且承接很好，主买盘为主', ]
+                      '9:20~9:25期间,撮合价格逐步走高,同时伴随着成交量的放大,且以密集红柱为主。最好在最后一两分钟内 有快速拉高(大资金强吃货),且最终竞价涨幅在3%~7%之间',
+                      '9:30前,有巨单挂过涨跌停价,个股形态完好,前几日分时有过异动或者有过涨停,开始股价涨停 ,竞价过程中撮合价格慢慢走低,但成交量有效放大,并且承接很好,主买盘为主', ]
+            sleep_time = 60
         else:
             ideals = ['市值小于50亿,剔除ST,缩量,最近10个交易日有6个交易日以上主力资金净流入,最近3个交易日涨幅为正,资金净流入的股票,散户卖出,筹码高度集中,MACD大于0,',
                       '市值小于50亿,散户持续卖出,放量,剔除ST,剔除次新,亿剔除次北交所,最近10个交易日有6个交易日以上主力资金净流入,最近3个交易日涨幅为正,',
-                      '市值小于50亿,放量,不包括次新股,剔除ST,剔除次新,亿剔除次北交所,股票市场不包括北交所,散户持续卖出,',
-                      '市值小于50亿,适合潜伏的股票,买入后10日概率拉升,近期热门板块,散户持续卖出,',
-                      '市值小于50亿,放量,剔除ST,剔除次新,剔除北交所,拉升通道,最近20日放量，',
-                      '市值小于100亿,亿剔除次新股,拉升通道,股票市场只包括创业板,MACD大于0,资金流入,最近20日放量，',
-                      '市值小于100亿,拉升,仅创业板,剔除ST,散户持续卖出,MACD大于0,业绩预增大于20%,筹码高度集中,资金流入,最近20日放量，',
+                      '市值小于50亿,放量,不包括次新股,剔除ST,剔除次新,亿剔除次北交所,股票市场不包括北交所,散户卖出,',
+                      '机构净额大于500万,关注度高,近期热门板块,散户卖出,',
+                      '市值小于50亿,放量,剔除ST,剔除次新,剔除北交所,拉升通道,最近20日放量,',
+                      '市值小于100亿,亿剔除次新股,拉升通道,股票市场只包括创业板,MACD大于0,资金流入,最近20日放量,',
+                      '市值小于100亿,拉升,仅创业板,剔除ST,散户持续卖出,MACD大于0,业绩预增大于20%,筹码高度集中,资金流入,最近20日放量,',
                       # AI模型精选优质股
-                      '小盘股（流通市值小于100亿），日线放量上涨，macd提示买入',
-                      '业绩预增大于20%，机构评级看多',
-                      '龙虎榜净买入，昨日放量上涨，短期趋势向上',
+                      '小盘股(流通市值小于100亿),日线放量上涨,macd提示买入',
+                      '业绩预增大于20%,机构评级看多',
+                      '龙虎榜净买入,昨日放量上涨,短期趋势向上',
                       ]
+            sleep_time = 600
         current_time = datetime.now().time()
         time1 = time(9, 10)
         time2 = time(11, 30)
         time3 = time(13, 0)
         time4 = time(15, 20)
-        if time1 <= current_time <= time2 or time3 <= current_time <= time4:            # 程序9.10分-11.30分，13.00-15.00运行时间
-        # if True:            # 程序9.10分-11.30分，13.00-15.00运行时间
+        if time1 <= current_time <= time2 or time3 <= current_time <= time4:            # 程序9.10分-11.30分,13.00-15.00运行时间
+        # if True:            # 程序9.10分-11.30分,13.00-15.00运行时间
             for ideal in ideals:
                 print_(ideal)
                 try:
@@ -223,7 +225,7 @@ def wencai_():
                         brain_think_ascending_channel(res, ideal)
                     else:
                         brain_think(res, ideal)
-        t.sleep(600)
+        t.sleep(sleep_time)
         # public_obj['code_list'] = res.rename(columns={'股票代码': 'code', '股票简称': 'name', '最新价': 'price'}).loc[:, ['code', 'name', 'price']].drop_duplicates().to_dict(orient='records')
 
 
@@ -252,14 +254,14 @@ def brain_analyse_CY():
 def brain_analyse_SH():
     """
     分析上证指数,
-    根据历史走势，近期热点板块，列入观察列表
+    根据历史走势,近期热点板块,列入观察列表
     """
     pass
 
 
 def watch_list():
     """
-    观察列表，是否观察到了大额度的交易，涨停前的具体表现就是大单子上推
+    观察列表,是否观察到了大额度的交易,涨停前的具体表现就是大单子上推
     """
     pass
 
@@ -307,23 +309,23 @@ def analyse():
     #     os.mkdir(f"{day}")
     # # namespace_prefix = 'data:'
     # # namespace_prefix = namespace_prefix + day
-    # res = wc.get(query='市值小于50亿；即将启动拉升；剔除次新股；剔除st股股票市场不包括北交所，剔除创业板股票')
+    # res = wc.get(query='市值小于50亿；即将启动拉升；剔除次新股；剔除st股股票市场不包括北交所,剔除创业板股票')
     # print_('------------------------即将启动拉升----------------------------')
     # print_(res['xuangu_tableV1'])
     # if res is not None: client.set(namespace_prefix + '即将启动拉升', json.dumps(list(set([i for i in res['xuangu_tableV1']['股票代码']]))))
     # print_(res['xuangu_tableV1'])
     # print_data(res)
-    # res = wc.get(query='市值小于50亿；上升趋势；剔除次新股；剔除st股；股票市场不包括北交所，剔除创业板股票')
+    # res = wc.get(query='市值小于50亿；上升趋势；剔除次新股；剔除st股；股票市场不包括北交所,剔除创业板股票')
     # print_('------------------------市值小于60亿上升趋势----------------------------')
     # if res is not None: client.set(namespace_prefix + '上升趋势', json.dumps(list(set([i for i in res['xuangu_tableV1']['股票代码']]))))
     # print_(res['xuangu_tableV1'])
     # print_data(res)
-    # res = wc.get(query='市值小于100亿,亿剔除次新股；剔除st股；拉升通道，股票市场不包括北交所，剔除创业板股票')
+    # res = wc.get(query='市值小于100亿,亿剔除次新股；剔除st股；拉升通道,股票市场不包括北交所,剔除创业板股票')
     # print_('------------------------市值小于100亿,拉升通道----------------------------')
     # if res is not None: client.set(namespace_prefix + '拉升通道', json.dumps(list(set([i for i in res['xuangu_tableV1']['股票代码']]))))
     # print_(res['xuangu_tableV1'])
     # print_data(res)
-    # res = wc.get(query='市值小于100亿,剔除创业板股票，筹码集中度90小于15%,PE小于70,准备拉升')
+    # res = wc.get(query='市值小于100亿,剔除创业板股票,筹码集中度90小于15%,PE小于70,准备拉升')
     # print_('------------------------市值小于100亿,准备拉升----------------------------')
     # if res is not None: client.set(namespace_prefix + '近半年没有拉升过的', json.dumps(list(set([i for i in res['xuangu_tableV1']['股票代码']]))))
     # client.close()
@@ -406,10 +408,14 @@ def myAnalyse(message_queue):
         print_(f'队列放入:{stock_list}')
         # for stock_name in stock_list:
         #     t.sleep(1)
-        #     res = wc.get(query=f'{stock_name}最近30个交易日,股票开盘价和收盘价，最高价最低价成交量，散户数量，机构数量，大单数量，中单数量，小单数量，大单金额，中单金额，小单金额')
+        #     res = wc.get(query=f'{stock_name}最近30个交易日,股票开盘价和收盘价,最高价最低价成交量,散户数量,机构数量,大单数量,中单数量,小单数量,大单金额,中单金额,小单金额')
         #     print_(res)
         stock_list.clear()
         t.sleep(100)
+
+def start_uvicorn():
+    # 注意：这里的"main:app"意味着uvicorn会从main.py文件中寻找名为app的FastAPI实例
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, log_level="info")
 
 
 if __name__ == '__main__':
@@ -418,9 +424,9 @@ if __name__ == '__main__':
     brain_thread_list = []
     brain_thread_list.append(threading.Thread(target=brain_zgl, args=()))
     brain_thread_list.append(threading.Thread(target=wencai_, args=()))
+    brain_thread_list.append(threading.Thread(target=start_uvicorn, args=()))
     # brain_thread_list.append(threading.Thread(target=myServer, args=("localhost", 8083,)))
     # brain_thread_list.append(threading.Thread(target=myAnalyse, args=(message_queue,)))
 
     for i in brain_thread_list:
         i.start()
-    uvicorn.run('main:app', host='127.0.0.1', port=8000, reload=False)
