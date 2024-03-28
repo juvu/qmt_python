@@ -1,7 +1,7 @@
 '''
 Date: 2024-03-21 16:11:02
 LastEditors: 牛智超
-LastEditTime: 2024-03-26 14:52:20
+LastEditTime: 2024-03-28 18:11:55
 FilePath: \python\algo\app\routers\items.py
 '''
 from fastapi import APIRouter, Depends, HTTPException, Request
@@ -9,6 +9,7 @@ from pydantic import BaseModel
 from typing import Union, List
 from fastapi.responses import FileResponse
 from dependencies import get_token_header
+import qstock as qs
 import os
 
 router = APIRouter(
@@ -191,3 +192,11 @@ async def download_file(filename: str):
         return FileResponse(filepath, media_type='application/octet-stream', filename=filename)
     else:
         raise HTTPException(status_code=404, detail="File not found")
+    
+@router.get("/excel/")
+async def get_data_excel():
+    #获取沪深A股最新行情指标
+    df=qs.realtime_data()
+    #查看前几行
+    df.head()
+    print(df.head())
