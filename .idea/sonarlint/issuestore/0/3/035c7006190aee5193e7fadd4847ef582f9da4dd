@@ -1,12 +1,0 @@
-
-upython:S117"WRename this parameter "ContextInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(ƒÖÛ–8ã»š‚Ü1
-Bpython:S125"Remove this commented out code.(Æ¦¦»şÿÿÿÿ8ã»š‚Ü1
-zpython:S117"WRename this parameter "ContextInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(£ÔµÃûÿÿÿÿ8ã»š‚Ü1
-xpython:S117"ZRename this local variable "buyAmount" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÉÄü8ä»š‚Ü1
-}python:S117"ZRename this local variable "buyNumber" to match the regular expression ^[_a-z][a-z0-9_]*$.(İØ½ÿşÿÿÿÿ8ä»š‚Ü1
-~python:S117!"[Rename this local variable "sellAmount" to match the regular expression ^[_a-z][a-z0-9_]*$.(¸§ßªÿÿÿÿÿ8ä»š‚Ü1
-~python:S117 "[Rename this local variable "sellNumber" to match the regular expression ^[_a-z][a-z0-9_]*$.(˜ÖùÙûÿÿÿÿ8ä»š‚Ü1
-Rpython:S1481!".Remove the unused local variable "sellAmount".(¸§ßªÿÿÿÿÿ8ä»š‚Ü1
-Lpython:S1481"-Remove the unused local variable "buyAmount".(ÉÄü8ä»š‚Ü1
-Mpython:S1481")Remove the unused local variable "count".(óÿÑ—øÿÿÿÿ8ä»š‚Ü1
-xpython:S3776"TRefactor this function to reduce its Cognitive Complexity from 22 to the 15 allowed.(£ÔµÃûÿÿÿÿ8ä»š‚Ü1

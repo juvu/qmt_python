@@ -1,31 +1,0 @@
-
-spython:S1161"WRename this field "Fmin_price_list" to match the regular expression ^[_a-z][_a-z0-9]*$.(Óßıÿÿÿÿ
-wpython:S1162"[Rename this field "Fmin_big_price_list" to match the regular expression ^[_a-z][_a-z0-9]*$.(àí¦Ûûÿÿÿÿ
-python:S101-"eRename class "timeDecided" to match the regular expression ^_?([A-Z_][a-zA-Z0-9]*|[a-z_][a-z0-9_]*)$.(€üİèúÿÿÿÿ
-kpython:S1176"TRename this parameter "priceObj" to match the regular expression ^[_a-z][a-z0-9_]*$.(Åæ”¤
-apython:S1006"JRename method "addObj" to match the regular expression ^[a-z_][a-z0-9_]*$.(Åæ”¤
-dpython:S117¶"MRename this parameter "C" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ş«•\
-Kpython:S1481»"2Replace unused local variable "accounts" with "_".(ÂåÀÏ
-Lpython:S1481»"3Replace unused local variable "positions" with "_".(ÂåÀÏ
-Ipython:S1481»"0Replace unused local variable "orders" with "_".(ÂåÀÏ
-Hpython:S1481»"/Replace unused local variable "deals" with "_".(ÂåÀÏ
-npython:S117"VRename this local variable "A_all" to match the regular expression ^[_a-z][a-z0-9_]*$.(–›Ô
-epython:S117ş"MRename this parameter "C" to match the regular expression ^[_a-z][a-z0-9_]*$.(½—Í±
-Tpython:S1481‰"6Remove the unused local variable "north_finance_info".(Ş¢ùÓşÿÿÿÿ
-Cpython:S1481‡"*Remove the unused local variable "result".(ô‡Ó©
-mpython:S3776ş"TRefactor this function to reduce its Cognitive Complexity from 19 to the 15 allowed.(½—Í±
-7python:S125™"Remove this commented out code.(¶ºÚÂ
-7python:S125Ã"Remove this commented out code.(£Á”Ğ
-jpython:S117Ê"MRename this parameter "C" to match the regular expression ^[_a-z][a-z0-9_]*$.(Éçıÿÿÿÿ
-Bpython:S1172Ğ")Remove the unused function parameter "C".(±¦ÇÒ
-epython:S117Ğ"MRename this parameter "C" to match the regular expression ^[_a-z][a-z0-9_]*$.(±¦ÇÒ
-6python:S125Ö"Remove this commented out code.(íïı:
-7python:S125Û"Remove this commented out code.(øÉÇ
-7python:S125à"Remove this commented out code.(Áß•˜
-<python:S125å"Remove this commented out code.(öîŒèûÿÿÿÿ
-npython:S3699‚"PRemove this use of the output from "remove"; "remove" doesnâ€™t return anything.(ê×íÅıÿÿÿÿ
-9python:S6659¡" Use `not` and `startswith` here.(é”¶ö
-Upython:S5754¤"<Specify an exception class to catch or reraise the exception(ˆÊÉ·
-Qpython:S1172©"3Remove the unused function parameter "ContextInfo".(ë­şŞÿÿÿÿÿ
-tpython:S117©"WRename this parameter "ContextInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(ë­şŞÿÿÿÿÿ
-tpython:S117©"WRename this parameter "accountInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(ë­şŞÿÿÿÿÿ

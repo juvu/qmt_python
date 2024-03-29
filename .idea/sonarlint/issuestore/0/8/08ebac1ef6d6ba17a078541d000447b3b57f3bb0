@@ -1,9 +1,0 @@
-
-npython:S117	"WRename this parameter "ContextInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(ƒÖÛ–
-spython:S117"WRename this parameter "ContextInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(£ÔµÃûÿÿÿÿ
-Ipython:S1481",Remove the unused local variable "lastdate".(Š½„”øÿÿÿÿ
-Dpython:S1481!",Remove the unused local variable "per_date".( «”
-Tpython:S5754&"<Specify an exception class to catch or reraise the exception(ˆÊÉ·
-Ppython:S1172*"3Remove the unused function parameter "ContextInfo".(…èüåúÿÿÿÿ
-spython:S117*"WRename this parameter "ContextInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(…èüåúÿÿÿÿ
-kpython:S1542*"NRename function "get_STOM" to match the regular expression ^[a-z_][a-z0-9_]*$.(…èüåúÿÿÿÿ

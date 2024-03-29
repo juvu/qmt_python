@@ -1,18 +1,0 @@
-
-npython:S117"WRename this parameter "ContextInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(ƒÖÛ–
-;python:S125"Remove this commented out code.(ˆíøúÿÿÿÿ
-spython:S117-"WRename this parameter "ContextInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(£ÔµÃûÿÿÿÿ
-spython:S1178"WRename this local variable "Result" to match the regular expression ^[_a-z][a-z0-9_]*$.( ¶®ıÿÿÿÿ
-spython:S117<"\Rename this local variable "Result_mean" to match the regular expression ^[_a-z][a-z0-9_]*$.(Š¿Ş
-qpython:S117="[Rename this local variable "Result_std" to match the regular expression ^[_a-z][a-z0-9_]*$.(³ö·v
-Kpython:S1481G"3Remove the unused local variable "open_currentbar".(Œô®½
-Fpython:S14810"/Remove the unused local variable "lasttimetag".(ÿİA
-qpython:S3776-"TRefactor this function to reduce its Cognitive Complexity from 49 to the 15 allowed.(£ÔµÃûÿÿÿÿ
-;python:S1257"Remove this commented out code.(”¶¡èøÿÿÿÿ
-;python:S125?"Remove this commented out code.(ˆíøúÿÿÿÿ
-;python:S125K"Remove this commented out code.(‘ƒŒµúÿÿÿÿ
-;python:S125V"Remove this commented out code.(ÆÙ˜Åøÿÿÿÿ
-5python:S125w"Remove this commented out code.(»Ÿä&
-6python:S125}"Remove this commented out code.(ÈÃ¯à
-7python:S125‰"Remove this commented out code.(çÒ­ğ
-7python:S125›"Remove this commented out code.(± ¥

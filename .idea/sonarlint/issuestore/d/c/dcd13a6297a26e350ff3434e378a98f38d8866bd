@@ -1,128 +1,0 @@
-
-jpython:S116"NRename this field "subMap" to match the regular expression ^[_a-z][_a-z0-9]*$.(¹”“øÿÿÿÿ
-rpython:S1176"VRename this parameter "stockValue" to match the regular expression ^[_a-z][a-z0-9_]*$.(îÔîÊüÿÿÿÿ
-npython:S117;"RRename this parameter "vStock" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÚĞ½úÿÿÿÿ
-mpython:S117"URename this parameter "dividType" to match the regular expression ^[_a-z][a-z0-9_]*$.(ıâÉæ
-opython:S117"WRename this parameter "realTimetag" to match the regular expression ^[_a-z][a-z0-9_]*$.(ıâÉæ
-mpython:S117"URename this parameter "stockCode" to match the regular expression ^[_a-z][a-z0-9_]*$.(ıâÉæ
-upython:S117¥"XRename this local variable "oriData" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ø«ó˜úÿÿÿÿ
-6python:S3626ë"Remove this redundant return.(ÙãŞŸ
-ppython:S117´"XRename this local variable "oriData" to match the regular expression ^[_a-z][a-z0-9_]*$.(Æê€è
-xpython:S117µ"[Rename this local variable "resultDict" to match the regular expression ^[_a-z][a-z0-9_]*$.(•ø¹‰ùÿÿÿÿ
-lpython:S3776®"TRefactor this function to reduce its Cognitive Complexity from 55 to the 15 allowed.(Õ–Ô
-xpython:S117"`Rename this local variable "TradeBoothIDict" to match the regular expression ^[_a-z][a-z0-9_]*$.(ƒÕĞ¤
-python:S117Œ"bRename this local variable "buyTradeBoothDict" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÌÜ÷ùÿÿÿÿ
-xpython:S117‘"`Rename this local variable "buyTradeBoothPd" to match the regular expression ^[_a-z][a-z0-9_]*$.(¾¶’¥
-python:S117"dRename this local variable "buyTradeBoothPdList" to match the regular expression ^[_a-z][a-z0-9_]*$.(ûªäïøÿÿÿÿ
-kpython:S117ù"SRename this parameter "endTime" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ïìë
-vpython:S117û"YRename this local variable "resultDf" to match the regular expression ^[_a-z][a-z0-9_]*$.(ßôµŞüÿÿÿÿ
-xpython:S117‚"[Rename this local variable "resultDict" to match the regular expression ^[_a-z][a-z0-9_]*$.(è»¬ãıÿÿÿÿ
-{python:S117"cRename this local variable "sellTradeBoothDict" to match the regular expression ^[_a-z][a-z0-9_]*$.(¯çî
-xpython:S117–"aRename this local variable "sellTradeBoothPd" to match the regular expression ^[_a-z][a-z0-9_]*$.(ˆ£úm
-}python:S117"eRename this local variable "sellTradeBoothPdList" to match the regular expression ^[_a-z][a-z0-9_]*$.(¹è“´
-mpython:S117ù"URename this parameter "startTime" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ïìë
-upython:S117‰"XRename this local variable "stockDf" to match the regular expression ^[_a-z][a-z0-9_]*$.(¹×ßáüÿÿÿÿ
-wpython:S117ˆ"ZRename this local variable "stockDict" to match the regular expression ^[_a-z][a-z0-9_]*$.(áô½¹úÿÿÿÿ
-python:S117…"dRename this local variable "tradeBoothItemFiled" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ä‹¢Ğÿÿÿÿÿ
-vpython:S117’"^Rename this local variable "tradeBoothKey" to match the regular expression ^[_a-z][a-z0-9_]*$.(İõ€
-mpython:S3776ù"TRefactor this function to reduce its Cognitive Complexity from 17 to the 15 allowed.(Ïìë
-fpython:S1226ù"MIntroduce a new variable or use its initial value before reassigning 'count'.(Ïìë
-wpython:S117­"ZRename this parameter "marketAndStock" to match the regular expression ^[_a-z][a-z0-9_]*$.(¸ğ›´ÿÿÿÿÿ
-Opython:S1172°"1Remove the unused function parameter "startDate".( ›¹–øÿÿÿÿ
-Opython:S1172°"1Remove the unused function parameter "stockList".( ›¹–øÿÿÿÿ
-Opython:S1172°"1Remove the unused function parameter "fieldList".( ›¹–øÿÿÿÿ
-Mpython:S1172°"/Remove the unused function parameter "endDate".( ›¹–øÿÿÿÿ
-ppython:S117°"SRename this parameter "endDate" to match the regular expression ^[_a-z][a-z0-9_]*$.( ›¹–øÿÿÿÿ
-rpython:S117°"URename this parameter "fieldList" to match the regular expression ^[_a-z][a-z0-9_]*$.( ›¹–øÿÿÿÿ
-rpython:S117°"URename this parameter "startDate" to match the regular expression ^[_a-z][a-z0-9_]*$.( ›¹–øÿÿÿÿ
-rpython:S117°"URename this parameter "stockList" to match the regular expression ^[_a-z][a-z0-9_]*$.( ›¹–øÿÿÿÿ
-@python:S1481²"'Remove the unused local variable "pos".(–ÔüÂ
-ipython:S1226°"KIntroduce a new variable or use its initial value before reassigning 'pos'.( ›¹–øÿÿÿÿ
-5python:S6660±"Use `not isinstance()` here.(ŠóŠÿ
-kpython:S117·"SRename this parameter "endDate" to match the regular expression ^[_a-z][a-z0-9_]*$.(ö§æÑ
-mpython:S117·"URename this parameter "fieldList" to match the regular expression ^[_a-z][a-z0-9_]*$.(ö§æÑ
-xpython:S117¼"[Rename this local variable "pandasData" to match the regular expression ^[_a-z][a-z0-9_]*$.(£“Š™ûÿÿÿÿ
-mpython:S117·"URename this parameter "startDate" to match the regular expression ^[_a-z][a-z0-9_]*$.(ö§æÑ
-mpython:S117·"URename this parameter "stockList" to match the regular expression ^[_a-z][a-z0-9_]*$.(ö§æÑ
-ppython:S117Û"YRename this local variable "dataDict" to match the regular expression ^[_a-z][a-z0-9_]*$.(òü *
-qpython:S117İ"YRename this local variable "dataList" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ëæ¶’
-ppython:S117¿"SRename this parameter "endDate" to match the regular expression ^[_a-z][a-z0-9_]*$.( ›¹–øÿÿÿÿ
-rpython:S117¿"URename this parameter "fieldList" to match the regular expression ^[_a-z][a-z0-9_]*$.( ›¹–øÿÿÿÿ
-xpython:S117Ê"[Rename this local variable "pandasData" to match the regular expression ^[_a-z][a-z0-9_]*$.(Œ±‰æùÿÿÿÿ
-rpython:S117¿"URename this parameter "startDate" to match the regular expression ^[_a-z][a-z0-9_]*$.( ›¹–øÿÿÿÿ
-rpython:S117¿"URename this parameter "stockList" to match the regular expression ^[_a-z][a-z0-9_]*$.( ›¹–øÿÿÿÿ
-vpython:S117×"YRename this local variable "subValue" to match the regular expression ^[_a-z][a-z0-9_]*$.(ƒšŞúÿÿÿÿ
-rpython:S3776¿"TRefactor this function to reduce its Cognitive Complexity from 50 to the 15 allowed.( ›¹–øÿÿÿÿ
-5python:S6660À"Use `not isinstance()` here.(ŠóŠÿ
-Cpython:S6660Å"%Use the `isinstance()` function here.(Ã’ ÿÿÿÿÿ
-Cpython:S6660Å"%Use the `isinstance()` function here.(Ã’ ÿÿÿÿÿ
-<python:S125Ú"Remove this commented out code.(ú†àêıÿÿÿÿ
-xpython:S117€"[Rename this local variable "resultDict" to match the regular expression ^[_a-z][a-z0-9_]*$.(•ø¹‰ùÿÿÿÿ
-ypython:S117"\Rename this local variable "resultPanel" to match the regular expression ^[_a-z][a-z0-9_]*$.(±Õ¹—şÿÿÿÿ
-xpython:S117ÿ"`Rename this local variable "resultPanelDict" to match the regular expression ^[_a-z][a-z0-9_]*$.(óÄûë
-wpython:S117Š"ZRename this local variable "stockDict" to match the regular expression ^[_a-z][a-z0-9_]*$.(áô½¹úÿÿÿÿ
-qpython:S117"YRename this local variable "stockNum" to match the regular expression ^[_a-z][a-z0-9_]*$.(©Å™ß
-spython:S117‰"\Rename this local variable "stockPdData" to match the regular expression ^[_a-z][a-z0-9_]*$.(äÌÕ,
-ppython:S117‹"XRename this local variable "timeKey" to match the regular expression ^[_a-z][a-z0-9_]*$.(×œÿ
-ppython:S117‘"XRename this local variable "timeNum" to match the regular expression ^[_a-z][a-z0-9_]*$.(ûïÆº
-rpython:S3776ı"TRefactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.(„ÅÖ§üÿÿÿÿ
-ppython:S117¬"SRename this parameter "endTime" to match the regular expression ^[_a-z][a-z0-9_]*$.(¾•²»ûÿÿÿÿ
-spython:S117±"[Rename this local variable "resultDict" to match the regular expression ^[_a-z][a-z0-9_]*$.(í¶Ñ‰
-rpython:S117¬"URename this parameter "startTime" to match the regular expression ^[_a-z][a-z0-9_]*$.(¾•²»ûÿÿÿÿ
-mpython:S117º"URename this parameter "drawStyle" to match the regular expression ^[_a-z][a-z0-9_]*$.(öíì
-7python:S125Ì"Remove this commented out code.(„ì¿
-<python:S125Ù"Remove this commented out code.(ò™åËıÿÿÿÿ
-Apython:S1110…"#Remove those redundant parentheses.(êÓï©şÿÿÿÿ
-Apython:S1110"#Remove those redundant parentheses.(êÓï©şÿÿÿÿ
-lpython:S117¤"TRename this parameter "typeList" to match the regular expression ^[_a-z][a-z0-9_]*$.(ìÁ¤¡
-hpython:S100¤"PRename method "get_ETF_list" to match the regular expression ^[a-z_][a-z0-9_]*$.(ìÁ¤¡
-Bpython:S1481ª")Remove the unused local variable "frame".(éŸ£ª
-npython:S117±"VRename this parameter "marketCode" to match the regular expression ^[_a-z][a-z0-9_]*$.(´¢àŞ
-6python:S3626ß"Remove this redundant return.(ÙãŞŸ
-mpython:S3776á"TRefactor this function to reduce its Cognitive Complexity from 26 to the 15 allowed.(¨—¤
-spython:S117´"[Rename this local variable "createDate" to match the regular expression ^[_a-z][a-z0-9_]*$.(¿â–ƒ
-upython:S117º"XRename this local variable "endDate" to match the regular expression ^[_a-z][a-z0-9_]*$.(¥ç°ûÿÿÿÿ
-upython:S117™"XRename this local variable "hisList" to match the regular expression ^[_a-z][a-z0-9_]*$.(ı¤æşÿÿÿÿÿ
-|python:S117…"_Rename this local variable "marketcodeList" to match the regular expression ^[_a-z][a-z0-9_]*$.(¶ò·ıÿÿÿÿÿ
-qpython:S117µ"YRename this local variable "openDate" to match the regular expression ^[_a-z][a-z0-9_]*$.(›™ÂÆ
-upython:S117–"XRename this local variable "optList" to match the regular expression ^[_a-z][a-z0-9_]*$.(½ù•Ãúÿÿÿÿ
-qpython:S117„"YRename this local variable "undlCode" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÛÚÏ“
-spython:S117ƒ"[Rename this local variable "undlMarket" to match the regular expression ^[_a-z][a-z0-9_]*$.(úõ¼
-mpython:S3776€"TRefactor this function to reduce its Cognitive Complexity from 45 to the 15 allowed.(‚õÇí
-<python:S1110±"#Remove those redundant parentheses.(ØÅâÆ
-vpython:S117Ë"YRename this local variable "bsmPrice" to match the regular expression ^[_a-z][a-z0-9_]*$.(À‹´œøÿÿÿÿ
-ppython:S117Â"SRename this parameter "optType" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÛÊ‰äúÿÿÿÿ
-xpython:S117Ã"[Rename this local variable "optionType" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÄÌøÙøÿÿÿÿ
-qpython:S117Â"TRename this parameter "riskFree" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÛÊ‰äúÿÿÿÿ
-tpython:S117Â"WRename this parameter "strikePrice" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÛÊ‰äúÿÿÿÿ
-tpython:S117Â"WRename this parameter "targetPrice" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÛÊ‰äúÿÿÿÿ
-=python:S6660È"%Use the `isinstance()` function here.(Ü«ì
-ppython:S117Ô"SRename this parameter "optType" to match the regular expression ^[_a-z][a-z0-9_]*$.(†éªÙÿÿÿÿÿ
-tpython:S117Ô"WRename this parameter "optionPrice" to match the regular expression ^[_a-z][a-z0-9_]*$.(†éªÙÿÿÿÿÿ
-xpython:S117Ö"[Rename this local variable "optionType" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÊˆŸúÿÿÿÿ
-qpython:S117Ô"TRename this parameter "riskFree" to match the regular expression ^[_a-z][a-z0-9_]*$.(†éªÙÿÿÿÿÿ
-tpython:S117Ô"WRename this parameter "strikePrice" to match the regular expression ^[_a-z][a-z0-9_]*$.(†éªÙÿÿÿÿÿ
-tpython:S117Ô"WRename this parameter "targetPrice" to match the regular expression ^[_a-z][a-z0-9_]*$.(†éªÙÿÿÿÿÿ
-mpython:S117İ"URename this parameter "stockCode" to match the regular expression ^[_a-z][a-z0-9_]*$.(îêÔ¿
-<python:S125Ş"Remove this commented out code.(µË—ãüÿÿÿÿ
-mpython:S117æ"URename this parameter "stockCode" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÏÈÓ…
-7python:S125Ê"Remove this commented out code.(•â¸õ
-ppython:S117ñ"YRename this local variable "dataDict" to match the regular expression ^[_a-z][a-z0-9_]*$.(òü *
-qpython:S117ó"YRename this local variable "dataList" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ëæ¶’
-xpython:S117á"[Rename this local variable "pandasData" to match the regular expression ^[_a-z][a-z0-9_]*$.(éó¬Ôøÿÿÿÿ
-vpython:S117í"YRename this local variable "subValue" to match the regular expression ^[_a-z][a-z0-9_]*$.(ƒšŞúÿÿÿÿ
-mpython:S3776Ù"TRefactor this function to reduce its Cognitive Complexity from 47 to the 15 allowed.(‰„ÿ•
-Cpython:S6660İ"%Use the `isinstance()` function here.(á»ğ—ûÿÿÿÿ
-<python:S125ğ"Remove this commented out code.(ú†àêıÿÿÿÿ
-spython:S117©"VRename this local variable "subID" to match the regular expression ^[_a-z][a-z0-9_]*$.(ñÍõ¯şÿÿÿÿ
-ppython:S117«"XRename this local variable "subInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ì„ò²
-6python:S3626š"Remove this redundant return.(ÙãŞŸ
-6python:S3626Ÿ"Remove this redundant return.(ÙãŞŸ
-6python:S3626§"Remove this redundant return.(ÙãŞŸ
-npython:S117¼"VRename this local variable "subID" to match the regular expression ^[_a-z][a-z0-9_]*$.(µ…Ãı
-ppython:S117¾"XRename this local variable "subInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(Ì„ò²
-6python:S3626º"Remove this redundant return.(ÙãŞŸ
-ipython:S117Ä"QRename this parameter "subID" to match the regular expression ^[_a-z][a-z0-9_]*$.(°î˜‰
-7python:S125İ"Remove this commented out code.(† ÂÃ
-opython:S117â"RRename this parameter "strReq" to match the regular expression ^[_a-z][a-z0-9_]*$.(¦¦Âàıÿÿÿÿ
-6python:S3626å"Remove this redundant return.(ÙãŞŸ
