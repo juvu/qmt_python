@@ -1,3 +1,9 @@
+'''
+Date: 2024-03-25 08:38:42
+LastEditors: 牛智超
+LastEditTime: 2024-03-29 13:38:29
+FilePath: \python\algo\多线程.py
+'''
 import os
 import threading
 
@@ -9,8 +15,8 @@ import time
 start_time = time.time()
 
 today = time.strftime("%Y%m%d", time.localtime())
-if os.path.exists(f'./stock/{today}') == False:
-    os.makedirs(f'./stock/{today}')
+if os.path.exists(f'./algo/stock/{today}') == False:
+    os.makedirs(f'./algo/stock/{today}')
 
 
 def splite_data(data):
@@ -30,7 +36,6 @@ def build_csv(data):
                 'high',
                 'low',
                 'volume',
-
             ]
             # 对列进行重新排序设置成OHLC
             stock_history = stock_history[['date', 'open', 'high', 'low', 'close', 'volume']]
@@ -40,7 +45,7 @@ def build_csv(data):
 
             # 保存成csv文件，这里可以设置自己的路径。
             print(i)
-            stock_history.to_csv(f'./stock/{today}/{i}.csv')
+            stock_history.to_csv(f'./algo/stock/{today}/{i}.csv')
         except:
             continue
 
