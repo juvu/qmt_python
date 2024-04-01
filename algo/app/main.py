@@ -25,6 +25,7 @@ logging.basicConfig(
     filename='./algo/app/default.log'
 )
 
+wc_cookie = 'other_uid=Ths_iwencai_Xuangu_41vfv1vlblvtypzybza73qz2bmancvun; ta_random_userid=68jl1uapc4; cid=9f45e3d94987c7cf28211813fadf19a31702255069; cid=9f45e3d94987c7cf28211813fadf19a31702255069; ComputerID=9f45e3d94987c7cf28211813fadf19a31702255069; WafStatus=0; wencai_pc_version=0; guideState=1; u_ukey=A10702B8689642C6BE607730E11E6E4A; u_uver=1.0.0; u_dpass=gWfUOIhqH1wtJfzrEmwEBXY9ZW4Lk69dHjg7C8bX0wK1DsUiKSPcy8ZwZzS7iiUt%2FsBAGfA5tlbuzYBqqcUNFA%3D%3D; u_did=09D1C533E4DC420F9AE878247B25851D; u_ttype=WEB; THSSESSID=071294da17bd70627cf6b62a2c; ttype=WEB; user=MDptb181NjI3MjgwNzU6Ok5vbmU6NTAwOjU3MjcyODA3NTo3LDExMTExMTExMTExLDQwOzQ0LDExLDQwOzYsMSw0MDs1LDEsNDA7MSwxMDEsNDA7MiwxLDQwOzMsMSw0MDs1LDEsNDA7OCwwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMSw0MDsxMDIsMSw0MDoyNDo6OjU2MjcyODA3NToxNzExOTM0MTAxOjo6MTYxMDkyNDk0MDo1NzUwOTk6MDoxODJhNjg3N2IwNmRkYWMxMGViODViNzdiMTc5ZjVkNzE6ZGVmYXVsdF80OjE%3D; userid=562728075; u_name=mo_562728075; escapename=mo_562728075; ticket=f80b1c47c7819934724acebd009752fb; user_status=0; utk=36910f3ccc86b9410ddd14a53c5c2167; v=A2ZOq7dgPPulFehfith4QhNbt9fqR6oifIreZVAPVJRlJAhJuNf6EUwbLngj'
 
 app = FastAPI()
 app.include_router(items.router)
@@ -94,6 +95,33 @@ def brain_zgl():
     """
     pass
 
+
+def code_list_to_csv(code_list: list):
+    """
+    将股票代码列表转换为csv文件
+    """
+    if not os.path.exists(f'./data/{day}'):
+        os.makedirs(f'./data/{day}')
+    if code_list:
+        freq = 1
+        for i in code_list:
+            df = ef.stock.get_quote_history(i, klt=freq)
+            df.to_csv(f'./data/{day}/{i}.csv', encoding='utf-8-sig', index=None)
+
+def question_wc(question):
+    res = None
+    try:
+        res = wc.get(query=question,cookie=wc_cookie)
+    except Exception as e:
+        webbrowser.open('https://www.iwencai.com/unifiedwap/reptile.html?returnUrl=https%3A%2F%2Fwww.iwencai.com%2Funifiedwap%2Fhome%2Findex%3Fsign%3D1709793871013&sessionId=117.30.119.18&antType=unifiedwap')
+        print_(e)
+        t.sleep(20)
+    # if res is not None:
+        # res_list = print_data(res)
+        # code_list_to_csv(res_list)
+        # return res_list
+    return res
+
 def wencai_():
 
     def brain_think(res, ideal):
@@ -113,31 +141,32 @@ def wencai_():
             master_money_str = '主力资金流向'                                                                            #   
             current_date = get_trade_date(0)                                                                            #   
             # 市值
-            if f'a股市值(不含限售股)[{current_date}]' in stock_info.keys():
-                market_value = int(float(stock_info[f'a股市值(不含限售股)[{current_date}]']))/10000                                                     # 9.144036
             # 资金买卖
             # 资金净流入
-            if f'资金流入inner[{current_date}]' in stock_info.keys() and f'主力买入金额[{current_date}]' in stock_info.keys():
+            if f'资金流入inner[{current_date}]' in stock_info.keys() and f'主力买入金额[{current_date}]' in stock_info.keys() and f'a股市值(不含限售股)[{current_date}]' in stock_info.keys():
+                market_value = int(float(stock_info[f'a股市值(不含限售股)[{get_trade_date(0)}]']))/10000                                                     # 9.144036
                 net_capital_inflow = (float(stock_info[f'资金流入inner[{current_date}]']) - float(stock_info[f'资金流出inner[{current_date}]'])) / 10000
                 main_net_buying = (float(stock_info[f'主力买入金额[{current_date}]']) - float(stock_info[f'主力卖出金额[{current_date}]']))/ 10000
                 net_capital_inflow / market_value
                 main_net_buying / market_value
             if f'dde散户数量[{current_date}]' in stock_info.keys():
                 stock_info[f'dde散户数量[{current_date}]']
-            res = wc.get(query=f'{stock_info["股票简称"]}散户情况', )
-            if 'barline3' in res.keys(): 
-                print_(res['barline3'])
-                if 'dde散户数量' in res['barline3'].keys(): print_(res['barline3']['dde散户数量'].astype(float).sum())
-            if '多日累计dde散户数量' in res.keys(): print_(res['多日累计dde散户数量'])
-            if '文本标题h1' in res.keys(): print_(res['文本标题h1'])
+            res = question_wc(f'{stock_info["股票简称"]}散户情况')
+            # res = wc.get(query=f'{stock_info["股票简称"]}散户情况')
+            if res is not None:
+                if 'barline3' in res.keys(): 
+                    print_(res['barline3'])
+                    if 'dde散户数量' in res['barline3'].keys(): print_(res['barline3']['dde散户数量'].astype(float).sum())
+                if '多日累计dde散户数量' in res.keys(): print_(res['多日累计dde散户数量'])
+                if '文本标题h1' in res.keys(): print_(res['文本标题h1'])
             # if 'txt1' in res.keys():
                 # print_(res['txt1'])
             
          # print_(pd.merge(res['barline3'], res['历史主力资金流向']['barline3']))
-            code_list.append(stock_info['code'])
+                code_list.append(stock_info['code'])
 
-        if 'apply' in dir(res): res.apply(get_code_info, axis=1)
-        print_(code_list)
+            if 'apply' in dir(res): res.apply(get_code_info, axis=1)
+            print_(code_list)
         # res_list = res.to_dict(orient='records')
         # res_code_list = [i['股票代码'] for i in res_list]
         # for i in res_code_list:
@@ -202,12 +231,12 @@ def wencai_():
                       ]
             sleep_time = 600
         current_time = datetime.now().time()
-        time1 = time(9, 10)
+        time1 = time(9, 26)
         time2 = time(11, 30)
         time3 = time(13, 0)
         time4 = time(15, 10)
-        if time1 <= current_time <= time2 or time3 <= current_time <= time4:            # 程序9.10分-11.30分,13.00-15.00运行时间
-        # if True:            # 程序9.10分-11.30分,13.00-15.00运行时间
+        if time1 <= current_time <= time2 or time3 <= current_time <= time4:            # 程序9.26分-11.30分,13.00-15.10运行时间
+        # if True:            # 程序9.10分-11.30分,13.00-15.10运行时间
             for ideal in ideals:
                 print_(ideal)
                 try:
@@ -280,26 +309,70 @@ def watch_list():
 
 # ['__class__', '__deepcopy__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'barpos', 'benchmark', 'bsm_iv', 'bsm_price', 'capital', 'context', 'create_sector', 'current_bar', 'data_info_level', 'dividend_type', 'do_back_test', 'draw_icon', 'draw_number', 'draw_text', 'draw_vertline', 'end', 'get_ETF_list', 'get_all_subscription', 'get_back_test_index', 'get_bar_timetag', 'get_bvol', 'get_close_price', 'get_commission', 'get_contract_expire_date', 'get_contract_multiplier', 'get_date_location', 'get_divid_factors', 'get_factor_data', 'get_finance', 'get_financial_data', 'get_float_caps', 'get_full_tick', 'get_function_line', 'get_his_contract_list', 'get_his_index_data', 'get_his_st_data', 'get_history_data', 'get_hkt_details', 'get_hkt_statistics', 'get_holder_num', 'get_industry', 'get_instrumentdetail', 'get_largecap', 'get_last_close', 'get_last_volume', 'get_local_data', 'get_longhubang', 'get_main_contract', 'get_market_data', 'get_market_data_ex', 'get_market_data_ex_ori', 'get_midcap', 'get_net_value', 'get_north_finance_change', 'get_open_date', 'get_option_detail_data', 'get_option_iv', 'get_option_list', 'get_option_undl', 'get_option_undl_data', 'get_product_asset_value', 'get_product_init_share', 'get_product_share', 'get_raw_financial_data', 'get_risk_free_rate', 'get_scale_and_rank', 'get_scale_and_stock', 'get_sector', 'get_slippage', 'get_smallcap', 'get_stock_list_in_sector', 'get_stock_name', 'get_stock_type', 'get_svol', 'get_tick_timetag', 'get_top10_share_holder', 'get_total_share', 'get_tradedatafromerds', 'get_trading_dates', 'get_turn_over_rate', 'get_turnover_rate', 'get_universe', 'get_weight_in_index', 'in_pythonworker', 'is_fund', 'is_future', 'is_last_bar', 'is_new_bar', 'is_stock', 'is_suspended_stock', 'load_stk_list', 'load_stk_vol_list', 'market', 'paint', 'period', 'refresh_rate', 'request_id', 'run_time', 'set_account', 'set_commission', 'set_slippage', 'set_universe', 'start', 'stockcode', 'stockcode_in_rzrk', 'subMap', 'subscribe_quote', 'subscribe_whole_quote', 'time_tick_size', 'unsubscribe_quote', 'z8sglma_last_barpos', 'z8sglma_last_version']
 # ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__instance_size__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'm_Enable', 'm_dAssetBalance', 'm_dAssureAsset', 'm_dAvailable', 'm_dBalance', 'm_dBuyWaitMoney', 'm_dCashIn', 'm_dCloseProfit', 'm_dCommission', 'm_dCredit', 'm_dCurrMargin', 'm_dDeposit', 'm_dEntrustAsset', 'm_dFetchBalance', 'm_dFrozenCash', 'm_dFrozenCommission', 'm_dFrozenMargin', 'm_dFrozenRoyalty', 'm_dFundValue', 'm_dGoldFrozen', 'm_dGoldValue', 'm_dInitBalance', 'm_dInitCloseMoney', 'm_dInstrumentValue', 'm_dInstrumentValueRMB', 'm_dIntradayBalance', 'm_dIntradayFreedBalance', 'm_dLoanValue', 'm_dLongValue', 'm_dMargin', 'm_dMaxMarginRate', 'm_dMortgage', 'm_dNav', 'm_dNetValue', 'm_dOccupiedBalance', 'm_dPositionProfit', 'm_dPreBalance', 'm_dPreCredit', 'm_dPreMortgage', 'm_dPurchasingPower', 'm_dRawMargin', 'm_dRealRiskDegree', 'm_dRealUsedMargin', 'm_dReceiveInterestTotal', 'm_dRepurchaseValue', 'm_dRisk', 'm_dRoyalty', 'm_dSellWaitMoney', 'm_dShortValue', 'm_dStockValue', 'm_dSubscribeFee', 'm_dTotalDebit', 'm_dWithdraw', 'm_nBrokerType', 'm_nDirection', 'm_strAccountID', 'm_strAccountKey', 'm_strAccountRemark', 'm_strBrokerName', 'm_strMoneyType', 'm_strOpenDate', 'm_strStatus', 'm_strTradingDate']
-def print_data(data):
-    if data is None: return
-    data = data['xuangu_tableV1']
-    data.rename(columns={'股票简称': 'name', '最新价': 'price'}, inplace=True)
-    data.sort_values(by='code', ascending=True, inplace=True, )
-    data = data.loc[:, ['code', 'name', 'price']].drop_duplicates()
-    for row in data.iterrows():
-        try:
-            result_set = wc.get(query=row[1]['name'], )
-            df3 = pd.merge(result_set['barline3'], result_set['历史主力资金流向']['barline3'])
-            result_set['barline3']
-            result_set['所属概念列表']
-            result_set['历史主力资金流向']['barline3']
-            result_set['kline2']
-            result_set['估值指标']['市盈率']['labelLine']
-            result_set['估值指标']['市净率']['labelLine']
-            result_set['估值指标']['市销率']['labelLine']
-            print_(df3)
-        except Exception as e:
-            print_(e)
+# def print_data(data):
+#     if data is None: return
+#     data = data['xuangu_tableV1']
+#     data.rename(columns={'股票简称': 'name', '最新价': 'price'}, inplace=True)
+#     data.sort_values(by='code', ascending=True, inplace=True, )
+#     data = data.loc[:, ['code', 'name', 'price']].drop_duplicates()
+#     for row in data.iterrows():
+#         try:
+#             result_set = wc.get(query=row[1]['name'], )
+#             df3 = pd.merge(result_set['barline3'], result_set['历史主力资金流向']['barline3'])
+#             result_set['barline3']
+#             result_set['所属概念列表']
+#             result_set['历史主力资金流向']['barline3']
+#             result_set['kline2']
+#             result_set['估值指标']['市盈率']['labelLine']
+#             result_set['估值指标']['市净率']['labelLine']
+#             result_set['估值指标']['市销率']['labelLine']
+#             print_(df3)
+#         except Exception as e:
+#             print_(e)
+
+def print_data(res):
+    if res is None: return
+    print_(res)
+    try:
+        res.rename(columns={'股票简称': 'name', '最新价': 'price'}, inplace=True)
+        res.sort_values(by='code', ascending=True, inplace=True, )
+        res = res.loc[:, ['code', 'name', 'price']].drop_duplicates()
+        for row in res.iterrows():
+            try:
+                result_set = wc.get(query=row[1]['name'], )
+                df3 = pd.merge(result_set['barline3'], result_set['历史主力资金流向']['barline3'])
+
+                # print__demo(result_set['近期重要事件'])
+                # print_(result_set['所属概念列表']['诊股概念分类名称'].to_list())
+                # print_("-" * 100)
+                # print_(f"支撑位:{result_set['kline2'].iloc[0:]['止盈止损(支撑位)'][0]} ------压力位:{result_set['kline2'].iloc[0:]['止盈止损(压力位)'][0]}----{result_set['支撑位压力位']}")
+                # if '若能站稳，意味着上涨空间打开，可适当关注5日均线，若跌破可考虑止盈' in result_set['支撑位压力位']:
+                # print_(result_set['财务数据'])
+                # print_(result_set['估值指标']['市净率']['txt1'][40:])
+                # print_(result_set['估值指标']['市销率']['txt1'][52:])
+                # print_(result_set['十大股东持股比例'].loc[:, ['大股东名称', '大股东持股比例', '大股东公告日期', '股东类型']])
+                # result_set['估值指标']['市销率']['labelLine'].tail(30)           # 有参考价值
+                # result_set['估值指标']['市净率']['labelLine'].tail(30)           # 有参考价值
+                # result_set['估值指标']['市净率']['labelLine'].tail(30)           # 有参考价值
+                # result_set['barline3']
+                # result_set['所属概念列表']
+                # result_set['历史主力资金流向']['barline3']
+                # result_set['kline2']
+                # result_set['估值指标']['市盈率']['labelLine']
+                # result_set['估值指标']['市净率']['labelLine']
+                # result_set['估值指标']['市销率']['labelLine']
+                # print_(df3)
+                # else:
+                #     pass
+                # print_(df3)
+                print_(df3)
+            except Exception as e:
+                print_(e)
+    except Exception as e:
+        print_(e)
+    if res is not None and 'code' in res.columns:
+        return res['code'].to_list()
+
 
 
 def analyse():

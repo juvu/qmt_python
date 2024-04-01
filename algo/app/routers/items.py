@@ -1,19 +1,21 @@
 '''
 Date: 2024-03-21 16:11:02
 LastEditors: 牛智超
-LastEditTime: 2024-03-29 17:56:58
+LastEditTime: 2024-04-01 17:36:45
 FilePath: \python\algo\app\routers\items.py
 '''
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request, Form
 from pydantic import BaseModel
 from typing import Union, List
 from fastapi.responses import FileResponse
-from dependencies import get_token_header
+# from dependencies import get_token_header
 import qstock as qs
 import pandas as pd
 import os
 import easyquotation
 from pathlib import Path
+
+from algo.app.databasetool import pgsql
 
 
 router = APIRouter(
@@ -24,7 +26,13 @@ router = APIRouter(
 )
 
 
-fake_items_db = {"plumbus": {"name": "Plumbus"}, "gun": {"name": "Portal Gun"}}
+def get_db():
+    db = pgsql.SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
 
 
 class OrdersItem(BaseModel):
@@ -155,11 +163,6 @@ async def buy():
     return code_list
 
 
-@router.get("/{item_id}")
-async def read_item(item_id: str):
-    if item_id not in fake_items_db:
-        raise HTTPException(status_code=404, detail="Item not found")
-    return {"name": fake_items_db[item_id]["name"], "item_id": item_id}
 
 
 @router.put(
@@ -272,4 +275,13 @@ async def get_data_excel():
     for key in all_market_dict.keys():
         print(key)
         print(all_market_dict[key])
-    
+
+# 定义请求体的数据模型
+class tjItem(BaseModel):
+    qm: str
+    info: str
+
+@router.post("/tj/")
+async def post_tj(item:tjItem):
+    data = pgsql.create_tj(db = get_db(),item=item)
+    return {"name": item.qm, "age": item.info}
