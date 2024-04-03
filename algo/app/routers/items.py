@@ -1,7 +1,7 @@
 '''
 Date: 2024-03-21 16:11:02
 LastEditors: 牛智超
-LastEditTime: 2024-04-01 17:36:45
+LastEditTime: 2024-04-02 08:51:41
 FilePath: \python\algo\app\routers\items.py
 '''
 from fastapi import APIRouter, Depends, HTTPException, Request, Form
@@ -15,8 +15,10 @@ import os
 import easyquotation
 from pathlib import Path
 
-from algo.app.databasetool import pgsql
+from sqlalchemy import and_
 
+from algo.app.databasetool import pgsql
+from algo.app.databasetool.pgsql import tjItem
 
 router = APIRouter(
     prefix="",
@@ -24,15 +26,6 @@ router = APIRouter(
     # dependencies=[Depends(get_token_header)],
     responses={404: {"description": "Not found"}},
 )
-
-
-def get_db():
-    db = pgsql.SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
 
 
 class OrdersItem(BaseModel):
@@ -163,8 +156,6 @@ async def buy():
     return code_list
 
 
-
-
 @router.put(
     "/{item_id}",
     tags=["custom"],
@@ -180,32 +171,35 @@ async def update_item(item_id: str):
 
 def list_log_files(directory: str = os.getcwd()):
     files = []
-    directory = os.path.join(directory,'algo','app','logs')
+    directory = os.path.join(directory, 'logs')
     for filename in os.listdir(directory):
         filepath = os.path.join(directory, filename)
         if os.path.isfile(filepath):
             files.append(filename)
     return files
 
+
 @router.get("/files/")
 async def get_files():
     files = list_log_files()
     return {"files": files}
 
+
 @router.get("/download/{filename}")
 async def download_file(filename: str):
-    filepath = os.path.join(os.getcwd(),"algo","app","logs", filename)
+    filepath = os.path.join(os.getcwd(), "algo", "app", "logs", filename)
     if os.path.isfile(filepath):
         return FileResponse(filepath, media_type='application/octet-stream', filename=filename)
     else:
         raise HTTPException(status_code=404, detail="File not found")
-    
+
+
 @router.get("/excel/")
 async def get_data_excel():
     # flag：盘口异动类型，默认输出全部类型的异动情况。
     # 可选：['火箭发射', '快速反弹','加速下跌', '高台跳水', '大笔买入', '大笔卖出', '封涨停板','封跌停板', '打开跌停板','打开涨停板','有大买盘','有大卖盘', 
     # '竞价上涨', '竞价下跌','高开5日线','低开5日线', '向上缺口','向下缺口', '60日新高','60日新低','60日大幅上涨', '60日大幅下跌'] 上述异动类型分别可使用1-22数字代替。
-    #获取沪深A股最新行情指标
+    # 获取沪深A股最新行情指标
     # code_list = ['比亚迪', '上证指数']
     # df=qs.realtime_data(code=code_list)
     # # 获取个股试试交易快照
@@ -219,19 +213,19 @@ async def get_data_excel():
     # df=qs.realtime_change(1)
     # #查看前几行
     # df.head()
-    
+
     # 沪深个股股东数量
     # stock_holder_num(date=None) 获取沪深A股市场公开的股东数目变化情况
     # date : 默认最新的报告期, 指定某季度如'2022-03-31','2022-06-30','2022-09-30','2022-12-31'
     # df=qs.stock_holder_num('20220930')
-    #df
-    #------------------------------------------------------------------------
+    # df
+    # ------------------------------------------------------------------------
     # df=qs.intraday_data('比亚迪')       # 当日成交所有成交记录
-    #------------------------------------------------------------------------
+    # ------------------------------------------------------------------------
     quotation = easyquotation.use('tencent')
     # loaded_codes_list=quotation.load_stock_codes()
     # loaded_codes_list
-    all_market_dict=quotation.all_market
+    all_market_dict = quotation.all_market
     print(all_market_dict)
     # data = {"日期":[],
     #         ">100亿10%数量":[],
@@ -247,41 +241,64 @@ async def get_data_excel():
     #         ">50亿5%数量":[],
     #         "(总数2883)占比%":[],
     #         "两市公司数量":[]}
-    data = {"日期":[],
-        "涨超10%":[],
-        "涨超5%":[],
-        "涨超3%":[],
-        "5日涨超5%":[],
-        "5日涨超10%":[], 
-        "跌超10%":[],
-        "跌超5%":[],
-        "跌超3%":[],
-        "5日跌超5%":[],
-        "5日跌超10%":[],
-        "昨5%中继续上涨":[],
-        "比例":[],
-        "昨涨5%中继续5%":[],
-        "占比":[],
-        "站稳10日均线":[],
-        "站稳20日均线":[],
-        "站稳60日均线":[],
-        "A股公司数量":[],
-        "沪成交额":[],
-        "深成交额":[],
-        "创业板":[],
-        "宗成交额":[],
-        }
+    data = {"日期": [],
+            "涨超10%": [],
+            "涨超5%": [],
+            "涨超3%": [],
+            "5日涨超5%": [],
+            "5日涨超10%": [],
+            "跌超10%": [],
+            "跌超5%": [],
+            "跌超3%": [],
+            "5日跌超5%": [],
+            "5日跌超10%": [],
+            "昨5%中继续上涨": [],
+            "比例": [],
+            "昨涨5%中继续5%": [],
+            "占比": [],
+            "站稳10日均线": [],
+            "站稳20日均线": [],
+            "站稳60日均线": [],
+            "A股公司数量": [],
+            "沪成交额": [],
+            "深成交额": [],
+            "创业板": [],
+            "宗成交额": [],
+            }
     df = pd.DataFrame(all_market_dict).T
     for key in all_market_dict.keys():
         print(key)
         print(all_market_dict[key])
 
-# 定义请求体的数据模型
-class tjItem(BaseModel):
-    qm: str
-    info: str
 
-@router.post("/tj/")
-async def post_tj(item:tjItem):
-    data = pgsql.create_tj(db = get_db(),item=item)
-    return {"name": item.qm, "age": item.info}
+@router.get("/tj")
+async def get_tj(qm: str, info: str):
+    pgsql.create(tjItem(qm=qm, info=info))
+    return {"data": "添加成功", "code": 200}
+
+
+@router.get("/ck")
+async def get_ck(qm: str = None):
+    if qm is not None:
+        return pgsql.get_db().query(tjItem).filter(tjItem.qm == qm).all()
+    return pgsql.read(tjItem)
+
+
+@router.get("/sc")
+async def get_ck(qm: str, info: str):
+    for i in pgsql.get_db().query(tjItem).filter(and_(tjItem.qm == qm, tjItem.info.like(f'%{info}%'))).all():
+        pgsql.get_db().delete(i)
+    pgsql.get_db().commit()
+    return {"data": "删除成功", "code": 200}
+
+
+@router.get("/tsgp")
+async def tsgp():
+    files = list_log_files()
+    files.sort()
+    filename = files[-1]
+    filepath = os.path.join(os.getcwd(), "logs", filename)
+    if os.path.isfile(filepath):
+        return FileResponse(filepath, media_type='application/octet-stream', filename=filename)
+    else:
+        raise HTTPException(status_code=404, detail="File not found")

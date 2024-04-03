@@ -10,6 +10,7 @@ import pywencai as wc
 import pandas as pd
 import redis
 import qstock as qs
+import efinance as ef
 
 
 import uvicorn
@@ -22,7 +23,7 @@ from routers import items
 
 logging.basicConfig(
     level=logging.NOTSET,
-    filename='./algo/app/default.log'
+    filename='.default.log'
 )
 
 wc_cookie = 'other_uid=Ths_iwencai_Xuangu_41vfv1vlblvtypzybza73qz2bmancvun; ta_random_userid=68jl1uapc4; cid=9f45e3d94987c7cf28211813fadf19a31702255069; cid=9f45e3d94987c7cf28211813fadf19a31702255069; ComputerID=9f45e3d94987c7cf28211813fadf19a31702255069; WafStatus=0; wencai_pc_version=0; guideState=1; u_ukey=A10702B8689642C6BE607730E11E6E4A; u_uver=1.0.0; u_dpass=gWfUOIhqH1wtJfzrEmwEBXY9ZW4Lk69dHjg7C8bX0wK1DsUiKSPcy8ZwZzS7iiUt%2FsBAGfA5tlbuzYBqqcUNFA%3D%3D; u_did=09D1C533E4DC420F9AE878247B25851D; u_ttype=WEB; THSSESSID=071294da17bd70627cf6b62a2c; ttype=WEB; user=MDptb181NjI3MjgwNzU6Ok5vbmU6NTAwOjU3MjcyODA3NTo3LDExMTExMTExMTExLDQwOzQ0LDExLDQwOzYsMSw0MDs1LDEsNDA7MSwxMDEsNDA7MiwxLDQwOzMsMSw0MDs1LDEsNDA7OCwwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMSw0MDsxMDIsMSw0MDoyNDo6OjU2MjcyODA3NToxNzExOTM0MTAxOjo6MTYxMDkyNDk0MDo1NzUwOTk6MDoxODJhNjg3N2IwNmRkYWMxMGViODViNzdiMTc5ZjVkNzE6ZGVmYXVsdF80OjE%3D; userid=562728075; u_name=mo_562728075; escapename=mo_562728075; ticket=f80b1c47c7819934724acebd009752fb; user_status=0; utk=36910f3ccc86b9410ddd14a53c5c2167; v=A2ZOq7dgPPulFehfith4QhNbt9fqR6oifIreZVAPVJRlJAhJuNf6EUwbLngj'
@@ -32,7 +33,7 @@ app.include_router(items.router)
 public_obj = {'code_list': [],
               }
 
-def print_(str_obj, directory="algo/app/logs"):
+def print_(str_obj, directory="logs/"):
     print(str_obj)
     logging.log(logging.INFO,str_obj)
     # 确保提供的目录存在
@@ -41,9 +42,7 @@ def print_(str_obj, directory="algo/app/logs"):
         # 获取当前时间
     current_time = t.localtime()
     
-    # 根据当前时间生成文件名
-    file_name = t.strftime("data_log_%Y-%m-%d-%H-%M.txt", current_time)
-    
+
     # 将分钟数转换为离最近的10分钟整数倍的时间（向下取整）
     minute = current_time.tm_min - (current_time.tm_min % 10)
     file_name = t.strftime(f"data_log_%Y-%m-%d-%H-{minute:02d}.txt", current_time)
@@ -100,6 +99,8 @@ def code_list_to_csv(code_list: list):
     """
     将股票代码列表转换为csv文件
     """
+    now = datetime.now()
+    day = now.strftime("%Y-%m-%d")
     if not os.path.exists(f'./data/{day}'):
         os.makedirs(f'./data/{day}')
     if code_list:
@@ -112,6 +113,7 @@ def question_wc(question):
     res = None
     try:
         res = wc.get(query=question,cookie=wc_cookie)
+        # res = None
     except Exception as e:
         webbrowser.open('https://www.iwencai.com/unifiedwap/reptile.html?returnUrl=https%3A%2F%2Fwww.iwencai.com%2Funifiedwap%2Fhome%2Findex%3Fsign%3D1709793871013&sessionId=117.30.119.18&antType=unifiedwap')
         print_(e)
