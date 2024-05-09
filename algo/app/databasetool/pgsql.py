@@ -40,8 +40,20 @@ class tjItem(Base):
     qm = Column(String)
     info = Column(String)
 
+class WatchCode(Base):
+    __tablename__ = 'WatchCode'
+    id = Column(Integer, primary_key=True)
+    code = Column(String, unique=True)
+    market = Column(String)
+    create_time = Column(DateTime, default=datetime.utcnow)
 
-#
+class WaitBuyList(Base):
+    __tablename__ = 'WaitBuyList'
+    id = Column(Integer, primary_key=True)
+    code = Column(String, unique=True)
+    market = Column(String)
+    create_time = Column(DateTime, default=datetime.utcnow)
+
 
 engine = create_engine(DATABASE_URL)
 
@@ -55,9 +67,13 @@ def get_items(skip: int = 0, limit: int = 100):
 
 
 def create(obj):
-    db.add(obj)
-    db.commit()
-    db.refresh(obj)
+    try:
+        db.add(obj)
+        db.commit()
+        db.refresh(obj)
+    except Exception as e:
+        db.rollback()
+        print(e)
     return obj
 
 def update(obj):

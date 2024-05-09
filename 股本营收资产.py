@@ -1,1 +1,26 @@
-MmJNMuofqSiOo1t_aMUZsOhKeKiirz1K5zLSCqhQlFxQv5rFmVO5zG21l-IGJuQkHmW_g6ULGRzb1MbWacwTOl_7fx0IclNSZh2taJz27kQT0NBng26NoK8A90CAmcbkrWip5PgPyJtetBwF1n_iaGXR7fxes2xEiZWGg_TybSH273mRMsc-zzeooszsA2qwPyARlmicKsH9a8c5NScfPUtHUupRs9B6tAL_hOT8dRtj6uan-CEprn6hUgnNylshowY6sE9pcEKQlJO2mGlxlOMo2EekIbSqoX9_8oGvG4WE4A6fmZ22_gXqkNHlmRc9p74rr9l4VFqE6hlmbN18ZDq3cZ73oRQN-KI_Vk6do12izB8qMFD2jEBpRFst0bUAZLnYL6mLcF29eLF8vyyPvrjnxGxrqn5gNZFrPTeKlqVtp2ezhBM0xDCpNs6oHsNQ25SQDIRa8fzn_B-tveORtLkb5f32SUiyL4CB_jNrxwGbOJ08kwg-PhfcnCDclGV3gw1zyVs_NL0Ka8uLWlPAP1EI5qykD5DRTtH9DuLPMZVTtBkqeATHrxK-CoUHfFg7y3dBul2DC7J4VAs80bbfhoDU58Ha3o1AAPOSSOq2ci_YQFbSexXcIt5pZiam5ce0d9hSQpfYZkZRu7DCE3NLMEoWpr2Cu_aVuVWckm_PN-6y0GCiR_D_MHEA0rVRcC81xWuBE_sVmobD114Q30DHac40p6aY_QKRczRtl0SFDEztC4RNtO-DkeKs4XBV6ONVbpMCXk1N9JzlBzlqs1A27d8mh50Id56bCS7QQo6eOxg1lMOb43EBfaBh8kLCdhX5YeZN2ChI8EcbJG07dfBFwQv402RUnY5cqa3mKWmQ1hXba3ZLKDaTP8ODzRTB5Jeqg6eRGIzy6XnYg1aeeMpwrDdDPvYYuUVue8vKWSSU8XConmM=
+#coding:gbk
+
+
+
+def init(ContextInfo):
+	pass
+
+def handlebar(ContextInfo):
+	d = ContextInfo.barpos
+	p = timetag_to_datetime(ContextInfo.get_bar_timetag(d),'%Y%m%d')
+	print(p)
+	cap_stk = ContextInfo.get_financial_data('CAPITALSTRUCTURE','total_capital',ContextInfo.market,ContextInfo.stockcode,d )
+	ContextInfo.paint('总股本',cap_stk/100000000,-1,0)
+	
+	inc_revenue = ContextInfo.get_financial_data('PERSHAREINDEX','inc_revenue',ContextInfo.market,ContextInfo.stockcode,d )
+	ContextInfo.paint('主营收入',inc_revenue/100000000,-1,0)
+	
+	s_fa_bps = ContextInfo.get_financial_data('PERSHAREINDEX','s_fa_bps',ContextInfo.market,ContextInfo.stockcode,d )
+	ContextInfo.paint('每股净资产',s_fa_bps,-1,0)
+	
+
+
+
+
+
+

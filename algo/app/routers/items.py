@@ -18,7 +18,13 @@ from pathlib import Path
 from sqlalchemy import and_
 
 from algo.app.databasetool import pgsql
-from algo.app.databasetool.pgsql import tjItem
+from algo.app.databasetool.pgsql import tjItem, WatchCode, WaitBuyList
+
+import easyquotation
+
+from algo.app.util.utils import gp_type_szsh
+
+quotation = easyquotation.use('tencent')  # 新浪 ['sina'] 腾讯 ['tencent', 'qq']
 
 router = APIRouter(
     prefix="",
@@ -104,6 +110,9 @@ async def sell(request: SellItem):
     可以借鉴AI分时高低策略，
     不能猛砸，有大单就出给大单，有小单就出给小单
     """
+
+    return_res = {"result": "False"}
+
     account = {
         "now_hold_stock_code": '',
         "now_hold_stock_name": '',
@@ -147,13 +156,21 @@ async def sell(request: SellItem):
         account['m_dInstrumentValue'] = a.m_dInstrumentValue
         account['m_dAvailable'] = a.m_dAvailable
         account['m_dPositionProfit'] = a.m_dPositionProfit
-    return True
+    # 计算是否卖出
+    code = [i for i in [gp_type_szsh(positions[0].m_strInstrumentID).split(".")[1].lower() + gp_type_szsh(positions[0].m_strInstrumentID).split(".")[0]]]
+    # info_set = quotation.stocks(gp_type_szsh(positions[0].m_strInstrumentID), prefix=True)
+    info_set = quotation.stocks(code, prefix=True)
+    profit = float(account['m_dPositionProfit'])
+    if float(profit) / account['m_dBalance'] > 0.03 or float(profit) / account['m_dBalance'] < -0.1:
+        return_res = {"result": "True"}
+    return return_res
 
 
 @router.get("/buy")
-async def buy():
-    code_list = ['000001.SH', '399001.SZ']
-    return code_list
+async def buy(zdcg: int):
+    code_list = pgsql.get_db().query(WaitBuyList).all()
+    list_ = [i.code for i in code_list]
+    return list_[:zdcg]
 
 
 @router.put(
@@ -171,7 +188,7 @@ async def update_item(item_id: str):
 
 def list_log_files(directory: str = os.getcwd()):
     files = []
-    directory = os.path.join(directory, 'logs')
+    directory = os.path.join(directory, 'files')
     for filename in os.listdir(directory):
         filepath = os.path.join(directory, filename)
         if os.path.isfile(filepath):
@@ -187,7 +204,7 @@ async def get_files():
 
 @router.get("/download/{filename}")
 async def download_file(filename: str):
-    filepath = os.path.join(os.getcwd(), "algo", "app", "logs", filename)
+    filepath = os.path.join(os.getcwd(), "algo", "app", "files", filename)
     if os.path.isfile(filepath):
         return FileResponse(filepath, media_type='application/octet-stream', filename=filename)
     else:
@@ -197,7 +214,7 @@ async def download_file(filename: str):
 @router.get("/excel/")
 async def get_data_excel():
     # flag：盘口异动类型，默认输出全部类型的异动情况。
-    # 可选：['火箭发射', '快速反弹','加速下跌', '高台跳水', '大笔买入', '大笔卖出', '封涨停板','封跌停板', '打开跌停板','打开涨停板','有大买盘','有大卖盘', 
+    # 可选：['火箭发射', '快速反弹','加速下跌', '高台跳水', '大笔买入', '大笔卖出', '封涨停板','封跌停板', '打开跌停板','打开涨停板','有大买盘','有大卖盘',
     # '竞价上涨', '竞价下跌','高开5日线','低开5日线', '向上缺口','向下缺口', '60日新高','60日新低','60日大幅上涨', '60日大幅下跌'] 上述异动类型分别可使用1-22数字代替。
     # 获取沪深A股最新行情指标
     # code_list = ['比亚迪', '上证指数']
@@ -292,13 +309,124 @@ async def get_ck(qm: str, info: str):
     return {"data": "删除成功", "code": 200}
 
 
+@router.get("/market_data")
+def market_data():
+    all_info = pd.DataFrame(quotation.market_snapshot(prefix=True).values())
+    # >100亿 总量
+    sz_gt100 = len(all_info[all_info['总市值'] >= 100])
+    # >100亿 10%数量
+    sz_gt100_zd_gt10 = len(all_info[(all_info['涨跌(%)'] >= 10) & (all_info['总市值'] >= 100)])
+    # >100亿 3%-7%数量
+    sz_gt100_zd_gt3lt7 = len(all_info[(all_info['涨跌(%)'] >= 3) & (all_info['涨跌(%)'] <= 7) & (all_info['总市值'] >= 100)])
+    # >100亿 0%--3%数量
+    sz_gt100_zd_gt0lt3 = len(all_info[(all_info['涨跌(%)'] >= 0) & (all_info['涨跌(%)'] <= 3) & (all_info['总市值'] >= 100)])
+    # >100亿 -3%-0%%数量
+    sz_gt100_zd_gt_3lt0 = len(all_info[(all_info['涨跌(%)'] >= -3) & (all_info['涨跌(%)'] <= 0) & (all_info['总市值'] >= 100)])
+    # >100亿 -7%-3%数量
+    sz_gt100_zd_gt_7lt_3 = len(all_info[(all_info['涨跌(%)'] >= -7) & (all_info['涨跌(%)'] <= -3) & (all_info['总市值'] >= 100)])
+    # >100亿 -10%-7%数量
+    sz_gt100_zd_gt_7lt_10 = len(all_info[(all_info['涨跌(%)'] >= -10) &(all_info['涨跌(%)'] <= -7) & (all_info['总市值'] >= 100)])
+    # >100亿 -10%%数量
+    sz_gt100_zd_lt_10 = len(all_info[(all_info['涨跌(%)'] <= -10) & (all_info['总市值'] >= 100)])
+    # 50-100亿 总量
+    sz_gt50lt100 = len(all_info[(all_info['总市值'] < 100) & (all_info['总市值'] >= 50)])
+    # 50-100亿 10%数量
+    sz_gt50lt100_zd_gt10 = len(all_info[(all_info['涨跌(%)'] >= 10) & (all_info['总市值'] < 100) & (all_info['总市值'] >= 50)])
+    # 50-100亿 7%--3%数量
+    sz_gt50lt100_zd_lt7gt3 = len(all_info[(all_info['涨跌(%)'] >= 3) & (all_info['涨跌(%)'] <= 7) & (all_info['总市值'] >= 50) & (all_info['总市值'] < 100)])
+    # 50-100亿 0%--3%数量
+    sz_gt50lt100_zd_gt0lt3 = len(all_info[(all_info['涨跌(%)'] >= 0) & (all_info['涨跌(%)'] <= 3) & (all_info['总市值'] >= 50) & (all_info['总市值'] < 100)])
+    # 50-100亿 -3%-0%%数量
+    sz_gt50lt100_zd_gt_3lt0 = len(all_info[(all_info['涨跌(%)'] >= -3) & (all_info['涨跌(%)'] <= 0) & (all_info['总市值'] >= 50) & (all_info['总市值'] < 100)])
+    # 50-100亿 -7%-3%数量
+    sz_gt50lt100_zd_gt_7lt_3 = len(all_info[(all_info['涨跌(%)'] >= -7) & (all_info['涨跌(%)'] <= -3) & (all_info['总市值'] >= 50) & (all_info['总市值'] < 100)])
+    # 50-100亿 -10%-7%数量
+    sz_gt50lt100_zd_gt_7lt_10 = len(all_info[(all_info['涨跌(%)'] >= -10) &(all_info['涨跌(%)'] <= -7) & (all_info['总市值'] >= 50) & (all_info['总市值'] < 100)])
+    # 50-100亿 -10%%数量
+    sz_gt50lt100_zd_lt_10 = len(all_info[(all_info['涨跌(%)'] < -10) & (all_info['总市值'] > 50) & (all_info['总市值'] < 100)])
+    # <50亿 总量
+    sz_lt50 = len(all_info[all_info['总市值'] < 50])
+    # <50亿 10%数量
+    sz_lt50_zd_gt10 = len(all_info[(all_info['涨跌(%)'] >= 10) & (all_info['总市值'] <= 50)])
+
+    # <50亿 7%--3%数量
+    sz_lt50_zd_lt7gt3 = len(all_info[(all_info['涨跌(%)'] > 3) & (all_info['涨跌(%)'] < 7) & (all_info['总市值'] < 50)])
+    # <50亿 0%--3%数量
+    sz_lt50_zd_gt0lt3 = len(all_info[(all_info['涨跌(%)'] > 0) & (all_info['涨跌(%)'] < 3) & (all_info['总市值'] < 50)])
+    # <50亿 -3%-0%%数量
+    sz_lt50_zd_gt_3lt0 = len(all_info[(all_info['涨跌(%)'] > -3) & (all_info['涨跌(%)'] < 0) & (all_info['总市值'] < 50)])
+    # <50亿 -7%-3%数量
+    sz_lt50_zd_gt_7lt_3 = len(all_info[(all_info['涨跌(%)'] > -7) & (all_info['涨跌(%)'] < -3) & (all_info['总市值'] < 50)])
+    # <50亿 -10%-7%数量
+    sz_lt50_zd_gt_7lt_10 = len(all_info[(all_info['涨跌(%)'] > -10) &(all_info['涨跌(%)'] < -7) & (all_info['总市值'] < 50)])
+    # <50亿 -10%%数量
+    sz_lt50_zd_lt_10 = len(all_info[(all_info['涨跌(%)'] < -10) & (all_info['总市值'] < 50)])
+
+    # >100亿 5%数量
+    sz_gt100_zd_gt5 = len(all_info[(all_info['涨跌(%)'] > 5) & (all_info['总市值'] > 100)])
+    # 50-100亿 5%数量
+    sz_gt50lt100_zd_gt5 = len(all_info[(all_info['涨跌(%)'] > 5) & (all_info['总市值'] < 100) & (all_info['总市值'] > 50)])
+    # <50亿 5%数量
+    sz_lt50_zd_gt5 = len(all_info[(all_info['涨跌(%)'] > 5) & (all_info['总市值'] < 50)])
+    # >10% 数量
+    zd_gt10 = len(all_info[all_info['涨跌(%)'] > 10])
+    # >5% 数量
+    zd_gt5 = len(all_info[all_info['涨跌(%)'] > 5])
+    # >3% 数量
+    zd_gt3 = len(all_info[all_info['涨跌(%)'] > 3])
+
+
+    # ---------------------盘后--------------------------------
+    # 5日 涨超5%数量
+    # res = wc.get(query='5日涨幅超过5%')
+    # # 5日 涨超10%数量
+    # res = wc.get(query='5日涨幅超过10%')
+    # # 跌超 10%数量
+    # zd_lt10 = all_info[all_info['涨跌(%)'] < -10]
+    return {
+        "sz_gt100": sz_gt100,
+        "sz_gt100_zd_gt10": sz_gt100_zd_gt10,
+        "sz_gt100_zd_gt3lt7": sz_gt100_zd_gt3lt7,
+        "sz_gt100_zd_gt0lt3": sz_gt100_zd_gt0lt3,
+        "sz_gt100_zd_gt_3lt0": sz_gt100_zd_gt_3lt0,
+        "sz_gt100_zd_gt_7lt_3": sz_gt100_zd_gt_7lt_3,
+        "sz_gt100_zd_gt_7lt_10": sz_gt100_zd_gt_7lt_10,
+        "sz_gt100_zd_lt_10": sz_gt100_zd_lt_10,
+        "sz_gt50lt100": sz_gt50lt100,
+        "sz_gt50lt100_zd_gt10": sz_gt50lt100_zd_gt10,
+        "sz_gt50lt100_zd_lt7gt3": sz_gt50lt100_zd_lt7gt3,
+        "sz_gt50lt100_zd_gt0lt3": sz_gt50lt100_zd_gt0lt3,
+        "sz_gt50lt100_zd_gt_3lt0": sz_gt50lt100_zd_gt_3lt0,
+        "sz_gt50lt100_zd_gt_7lt_3": sz_gt50lt100_zd_gt_7lt_3,
+        "sz_gt50lt100_zd_gt_7lt_10": sz_gt50lt100_zd_gt_7lt_10,
+        "sz_gt50lt100_zd_lt_10": sz_gt50lt100_zd_lt_10,
+        "sz_lt50": sz_lt50,
+        "sz_lt50_zd_gt10": sz_lt50_zd_gt10,
+        "sz_lt50_zd_lt7gt3": sz_lt50_zd_lt7gt3,
+        "sz_lt50_zd_gt0lt3": sz_lt50_zd_gt0lt3,
+        "sz_lt50_zd_gt_3lt0": sz_lt50_zd_gt_3lt0,
+        "sz_lt50_zd_gt_7lt_3": sz_lt50_zd_gt_7lt_3,
+        "sz_lt50_zd_gt_7lt_10": sz_lt50_zd_gt_7lt_10,
+        "sz_lt50_zd_lt_10": sz_lt50_zd_lt_10,
+        "sz_gt100_zd_gt5": sz_gt100_zd_gt5,
+        "sz_gt50lt100_zd_gt5": sz_gt50lt100_zd_gt5,
+        "sz_lt50_zd_gt5": sz_lt50_zd_gt5,
+        "zd_gt10": zd_gt10,
+        "zd_gt5": zd_gt5,
+        "zd_gt3": zd_gt3
+    }
+
+
 @router.get("/tsgp")
 async def tsgp():
+    BASE_URL = "http://0.0.0.0:8000"
     files = list_log_files()
     files.sort()
     filename = files[-1]
-    filepath = os.path.join(os.getcwd(), "logs", filename)
+    file_url = f"{BASE_URL}/files/{filename}"
+    filepath = os.path.join(os.getcwd(), "files", filename)
     if os.path.isfile(filepath):
-        return FileResponse(filepath, media_type='application/octet-stream', filename=filename)
+        # return FileResponse(filepath, filename=file_url)
+        return file_url
     else:
         raise HTTPException(status_code=404, detail="File not found")
