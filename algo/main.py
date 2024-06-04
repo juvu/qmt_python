@@ -138,8 +138,8 @@ threading.Thread(target=watch_market, args=()).start()
 
 
 question_list = [
-    '市值大于50亿,剔除ST,准备拉升',
-    '市值大于50亿,市值小于100亿,主力资金流入,剔除ST,剔除次新,剔除北交所,拉升通道',
+    '剔除ST,准备拉升',
+    '主力资金流入,剔除ST,剔除次新,剔除北交所,拉升通道',
 ]
 
 watch_list = []
@@ -152,5 +152,5 @@ for i in question_list:
         # print_(quotation.stocks(res, prefix=True))
 
 
-threading.Thread(target=watch, args=(watch_list,)).start()
+# threading.Thread(target=watch, args=(watch_list,)).start()
 
