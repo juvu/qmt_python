@@ -110,7 +110,6 @@ def brain_zgl():
     time2 = time(11, 30)
     time3 = time(13, 0)
     time4 = time(15, 10)
-    thread_list = []
     while True:
         if time1 <= current_time <= time2 or time3 <= current_time <= time4:
             for root, dirs, files in os.walk('./data/png'):
@@ -405,9 +404,9 @@ def wencai_():
         time3 = time(13, 0)
         time4 = time(15, 10)
         thread_list = []
-        # if time1 <= current_time <= time2 or time3 <= current_time <= time4:  # 程序9.26分-11.30分,13.00-15.10运行时间
+        if time1 <= current_time <= time2 or time3 <= current_time <= time4:  # 程序9.26分-11.30分,13.00-15.10运行时间
         # if time3 <= current_time <= time4:  # 程序9.26分-11.30分,13.00-15.10运行时间
-        if True:            # 程序9.10分-11.30分,13.00-15.10运行时间
+        # if True:            # 程序9.10分-11.30分,13.00-15.10运行时间
             for ideal in ideals:
                 print_(ideal)
                 try:
@@ -703,7 +702,7 @@ if __name__ == '__main__':
     brain_thread_list.append(threading.Thread(target=brain_zgl, args=()))           # 主力资金
     brain_thread_list.append(threading.Thread(target=wencai_, args=()))             # 启动问财
     brain_thread_list.append(threading.Thread(target=watch_data, args=()))          # 监控数据
-    brain_thread_list.append(threading.Thread(target=start_uvicorn, args=()))       # 启动web服务器
+    brain_thread_list.append(threading.Thread(target=start_uvicorn, args=()))       # 启动web服务器 fastapi
     # brain_thread_list.append(threading.Thread(target=myServer, args=("localhost", 8083,)))
     # brain_thread_list.append(threading.Thread(target=myAnalyse, args=(message_queue,)))
 

@@ -11696,3 +11696,103 @@ INFO:root:        股票代码  股票简称    最新价  ... dde大单净量[20240403] market
 [3 rows x 26 columns]
 INFO:root:机构净额大于500万,关注度高,近期热门板块,散户卖出,
 INFO:root:市值小于50亿,放量,剔除ST,剔除次新,剔除北交所,拉升通道,最近20日放量,
+INFO:root:市值大于100亿,放量,剔除ST,剔除次新,剔除北交所,拉升通道,最近20日放量,最近3个交易日涨幅为正,
+DEBUG:asyncio:Using proactor: IocpProactor
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): qt.gtimg.cn:80
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (2): qt.gtimg.cn:80
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (3): qt.gtimg.cn:80
+DEBUG:urllib3.connectionpool:http://qt.gtimg.cn:80 "GET /q=sh600548,sz000921,sh601838,sh600015,sh601229,sh600926,sh600236,sh600350,sh600782,sh600575,sh600623,sz000415,sh600452,sh600352,sh688617,sz300294,sz000999,sh688169,sh601838,sz002057 HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://qt.gtimg.cn:80 "GET /q=sz000685,sz000685,sz002668,sh600428,sh601163,sh600339,sz000598,sh600096,sh600968,sh601058,sh601857,sz300294,sz300294,sh601899,sz003816,sh600150,sh601872,sz000685,sz002668,sh600428,sh601163,sh600339,sz000598,sh600096,sh600968,sh601058,sh601857,sz000425,sh601872,sz002128,sh600398,sz001286,sz002595,sh600956,sh600737,sh601139,sh600012,sh601333,sh600548,sh601975,sz002683,sz000582,sh600388,sz002911,sh600717,sz002597,sh600269,sh600575,sz002818,sz000967,sz300294,sz300294,sh601899,sz003816,sh600150,sh601872,sh600398,sz002595,sh600956,sh600737 HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://qt.gtimg.cn:80 "GET /q=sh601139,sz000598,sh601333,sh600548,sh600339,sh601975,sz002683,sh600388,sz002911,sh600428,sh600717,sz002597,sh600269,sh600575,sz002818,sz300294,sz300294,sh600309,sh600150,sh601958,sh601636,sh600548,sz000899,sz300294,sh600362,sz002648,sh600529,sh600548,sh600269,sz000899,sh600926,sh603868,sz000899,sh600968,sh600926,sz300294,sh603939,sh600548,sz000899,sh600968,sh600926,sh603939,sh603868,sh600548,sz000899,sh600968,sh600926,sz300294,sh600362,sh603939,sh600548,sz000899,sh601975,sh600352,sh600968,sh600926,sh600309,sh600362,sh603939,sh603868 HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): www.iwencai.com:80
+DEBUG:urllib3.connectionpool:http://www.iwencai.com:80 "POST /customized/chart/get-robot-data HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): www.iwencai.com:80
+DEBUG:urllib3.connectionpool:http://www.iwencai.com:80 "POST /gateway/urp/v7/landing/getDataList HTTP/1.1" 200 None
+INFO:root:        股票代码  股票简称     最新价  ...  技术形态[20240604]  market_code    code
+0  688279.SH  峰岹科技  125.00  ...    放量||价跌量缩||阴线           17  688279
+1  002063.SZ  远光软件    5.84  ...    价升量涨||阳线||放量           33  002063
+2  600021.SH  上海电力   10.44  ...    价升量涨||阳线||放量           17  600021
+3  601019.SH  山东出版   13.46  ...    阳线||放量||价升量缩           17  601019
+4  601001.SH  晋控煤业   18.50  ...  放量||价跌量升||长下影线           17  601001
+5  300433.SZ  蓝思科技   15.43  ...   放量||价跌量缩||十字星           33  300433
+6  600674.SH  川投能源   18.27  ...    阳线||放量||价升量缩           17  600674
+7  600886.SH  国投电力   17.80  ...    放量||阴线||上升通道           17  600886
+8  601919.SH  中远海控   16.58  ...    价升量涨||阳线||放量           17  601919
+9  600900.SH  长江电力   27.48  ...    阳线||放量||价升量缩           17  600900
+
+[10 rows x 16 columns]
+INFO:root:市值大于100亿,放量,不包括次新股,剔除ST,剔除次新,亿剔除次北交所,股票市场不包括北交所,散户卖出,最近3个交易日涨幅为正,
+INFO:root:上升通道
+INFO:root:市值大于100亿,放量,剔除ST,剔除次新,剔除北交所,拉升通道,最近20日放量,最近3个交易日涨幅为正,
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): www.iwencai.com:80
+DEBUG:urllib3.connectionpool:http://www.iwencai.com:80 "POST /customized/chart/get-robot-data HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): www.iwencai.com:80
+DEBUG:urllib3.connectionpool:http://www.iwencai.com:80 "POST /gateway/urp/v7/landing/getDataList HTTP/1.1" 200 None
+INFO:root:         股票代码  股票简称     最新价  ... dde大单净量[20240604]  market_code    code
+0   603341.SH  龙旗科技   42.62  ...             0.103           17  603341
+1   688351.SH  微电生理   23.52  ...             0.076           17  688351
+2   688146.SH  中船特气   30.29  ...             0.347           17  688146
+3   301363.SZ  美好医疗   26.51  ...             0.012           33  301363
+4   600301.SH  华锡有色   20.02  ...             0.418           17  600301
+..        ...   ...     ...  ...               ...          ...     ...
+95  601179.SH  中国西电    7.46  ...             0.704           17  601179
+96  600875.SH  东方电气   19.05  ...             0.130           17  600875
+97  002223.SZ  鱼跃医疗   41.80  ...             0.255           33  002223
+98  300896.SZ   爱美客  206.14  ...             0.087           33  300896
+99  002422.SZ  科伦药业   33.22  ...             0.017           33  002422
+
+[100 rows x 19 columns]
+INFO:root:市值大于100亿,亿剔除次新股,拉升通道,股票市场只包括创业板,MACD大于0,资金流入,最近20日放量,最近3个交易日涨幅为正,
+INFO:root:分析散户
+INFO:root:市值大于100亿,放量,不包括次新股,剔除ST,剔除次新,亿剔除次北交所,股票市场不包括北交所,散户卖出,最近3个交易日涨幅为正,
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): www.iwencai.com:80
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): www.iwencai.com:80
+DEBUG:urllib3.connectionpool:http://www.iwencai.com:80 "POST /customized/chart/get-robot-data HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://www.iwencai.com:80 "POST /customized/chart/get-robot-data HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): www.iwencai.com:80
+DEBUG:urllib3.connectionpool:http://www.iwencai.com:80 "POST /gateway/urp/v7/landing/getDataList HTTP/1.1" 200 None
+INFO:root:        股票代码  股票简称    最新价  ... 资金流出inner[20240604]  market_code    code
+0  300298.SZ  三诺生物  28.30  ...        43092767.000           33  300298
+1  300761.SZ  立华股份  25.77  ...        51171092.200           33  300761
+2  300408.SZ  三环集团  29.44  ...       122776384.000           33  300408
+3  300433.SZ  蓝思科技  15.43  ...       227891872.000           33  300433
+
+[4 rows x 19 columns]
+INFO:root:上升通道
+INFO:root:市值大于100亿,拉升通道,仅创业板,MACD大于0,筹码高度集中,资金流入,
+INFO:root:市值大于100亿,亿剔除次新股,拉升通道,股票市场只包括创业板,MACD大于0,资金流入,最近20日放量,最近3个交易日涨幅为正,
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): www.iwencai.com:80
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): www.iwencai.com:80
+DEBUG:urllib3.connectionpool:http://www.iwencai.com:80 "POST /customized/chart/get-robot-data HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://www.iwencai.com:80 "POST /customized/chart/get-robot-data HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): www.iwencai.com:80
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): www.iwencai.com:80
+DEBUG:urllib3.connectionpool:http://www.iwencai.com:80 "POST /gateway/urp/v7/landing/getDataList HTTP/1.1" 200 None
+INFO:root:        股票代码  股票简称    最新价  ... 集中度70[20240604]  market_code    code
+0  300408.SZ  三环集团  29.44  ...           7.916           33  300408
+1  300433.SZ  蓝思科技  15.43  ...          10.677           33  300433
+2  300761.SZ  立华股份  25.77  ...          12.546           33  300761
+3  300298.SZ  三诺生物  28.30  ...          13.770           33  300298
+
+[4 rows x 26 columns]
+INFO:root:rsi金叉，总市值大于100亿，拉升通道,
+INFO:root:上升通道
+INFO:root:市值大于100亿,拉升通道,仅创业板,MACD大于0,筹码高度集中,资金流入,
+DEBUG:urllib3.connectionpool:http://www.iwencai.com:80 "POST /customized/chart/get-robot-data HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): www.iwencai.com:80
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): www.iwencai.com:80
+DEBUG:urllib3.connectionpool:http://www.iwencai.com:80 "POST /customized/chart/get-robot-data HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://www.iwencai.com:80 "POST /customized/chart/get-robot-data HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): www.iwencai.com:80
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): www.iwencai.com:80
+DEBUG:urllib3.connectionpool:http://www.iwencai.com:80 "POST /gateway/urp/v7/landing/getDataList HTTP/1.1" 200 None
+INFO:root:        股票代码  股票简称    最新价  ... 技术形态[20240604] market_code    code
+0  601919.SH  中远海控  16.58  ...   价升量涨||阳线||放量          17  601919
+1  601117.SH  中国化学   8.61  ...   价升量涨||阳线||缩量          17  601117
+2  600021.SH  上海电力  10.44  ...   价升量涨||阳线||放量          17  600021
+3  300298.SZ  三诺生物  28.30  ...   阳线||缩量||价升量缩          33  300298
+
+[4 rows x 13 columns]
+INFO:root:dde大单净额>100万，散户数量减少，量比>0.8，振幅>3%，流通市值大于等于20亿小于等于50亿，boll突破中轨，拉升通道
+INFO:root:上升通道
+INFO:root:rsi金叉，总市值大于100亿，拉升通道,
