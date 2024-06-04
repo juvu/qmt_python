@@ -100,18 +100,19 @@ def get_trade_date(day: int = 0):
     return current_date.strftime('%Y%m%d')
 
 
-def brain_zgl():
+def download_png_csv():
     """
     诸葛亮、荀彧:分析市场
-    找出市场上活跃的板块
+    找出市场上活跃的板块,主要收集数据
     """
     current_time = datetime.now().time()
-    time1 = time(9, 26)
+    time1 = time(9, 15)
     time2 = time(11, 30)
     time3 = time(13, 0)
     time4 = time(15, 10)
     while True:
-        if time1 <= current_time <= time2 or time3 <= current_time <= time4:
+        # if time1 <= current_time <= time2 or time3 <= current_time <= time4:
+        if True:
             for root, dirs, files in os.walk('./data/png'):
                 # 打印当前目录路径
                 # print(f'当前目录：{root}')
@@ -673,14 +674,33 @@ def start_uvicorn():
     uvicorn.run("main:app", host="0.0.0.0", port=8000, log_level="info")
 
 
-def watch_data():
+def watch_data_history():
     # 获取所有信息
 
     while True:
         try:
             watch_code_list = pgsql.get_db().query(WatchCode).all()
             watch_code_list = [i.code.split(".")[-1].lower()+i.code.split(".")[0] for i in watch_code_list]
-            # ['sz002520', 'sz300837', 'sz300916', 'sz300922', 'sz300946', 'sh600222', 'sh600843', 'sh600984', 'sh603280']
+            all_info = pd.DataFrame(quotation.stocks(watch_code_list, prefix=True)).T
+            # all_info[all_info['涨跌(%)']>1 & all_info['close']< all_info['open']]
+            # all_info[(all_info['涨跌(%)'] > 1) & (all_info['close'] < all_info['open'])]
+            # all_info[(all_info['涨跌(%)'] > 1) & (all_info['close'] < all_info['open'])].sort_values(by='振幅', ascending=False)
+            code = all_info[(all_info['涨跌(%)'] > 1) & (all_info['close'] < all_info['open'])].sort_values(by='振幅', ascending=False).iloc[1, :].code
+
+            pgsql.create(WaitBuyList(code=code, market=code[:2]))
+        except Exception as e:
+            # print(e)
+            # print(traceback.print_exc())
+            pass
+        t.sleep(600)
+
+def watch_data_history():
+    # 获取所有信息
+
+    while True:
+        try:
+            watch_code_list = pgsql.get_db().query(WatchCode).all()
+            watch_code_list = [i.code.split(".")[-1].lower()+i.code.split(".")[0] for i in watch_code_list]
             all_info = pd.DataFrame(quotation.stocks(watch_code_list, prefix=True)).T
             # all_info[all_info['涨跌(%)']>1 & all_info['close']< all_info['open']]
             # all_info[(all_info['涨跌(%)'] > 1) & (all_info['close'] < all_info['open'])]
@@ -699,9 +719,10 @@ if __name__ == '__main__':
     message_queue = queue.Queue()
     brain_thread_list = []
     brain_thread_list.append(threading.Thread(target=brain_analyse_SH, args=()))           # 主力资金
-    brain_thread_list.append(threading.Thread(target=brain_zgl, args=()))           # 主力资金
-    brain_thread_list.append(threading.Thread(target=wencai_, args=()))             # 启动问财
-    brain_thread_list.append(threading.Thread(target=watch_data, args=()))          # 监控数据
+    brain_thread_list.append(threading.Thread(target=watch_data_history, args=()))                 # 监控数据
+    brain_thread_list.append(threading.Thread(target=watch_data_history, args=()))                 # 监控数据
+    brain_thread_list.append(threading.Thread(target=download_png_csv, args=()))           # 收集数据
+    brain_thread_list.append(threading.Thread(target=wencai_, args=()))             # 问财
     brain_thread_list.append(threading.Thread(target=start_uvicorn, args=()))       # 启动web服务器 fastapi
     # brain_thread_list.append(threading.Thread(target=myServer, args=("localhost", 8083,)))
     # brain_thread_list.append(threading.Thread(target=myAnalyse, args=(message_queue,)))
