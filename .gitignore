@@ -1,5 +1,6 @@
 .idea/
 algo/app/files/*
 algo/app/stock/*
-algo/app/data/*
+algo/app/data/png/*
+algo/app/data/csv/*
 algo/data/*
