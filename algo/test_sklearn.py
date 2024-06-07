@@ -15,4 +15,3 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 pipe.fit(X_train, y_train)
 
 print(accuracy_score(pipe.predict(X_test), y_test))
-
