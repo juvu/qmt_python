@@ -1,6 +1,7 @@
 .idea/
 algo/app/files/*
 algo/app/stock/*
+algo/app/default.log
 algo/app/data/png/*
 algo/app/data/csv/*
 algo/data/*

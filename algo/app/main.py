@@ -674,9 +674,328 @@ def start_uvicorn():
     uvicorn.run("main:app", host="0.0.0.0", port=8000, log_level="info")
 
 
+def watch_data():
+    all_info = pd.DataFrame(quotation.market_snapshot(prefix=True).values())
+    # >2000亿 总量
+    sz_gt2000 = len(all_info[all_info['总市值'] >= 2000])
+    # >2000亿 10%数量
+    sz_gt2000_zd_gt10 = len(all_info[(all_info['涨跌(%)'] >= 10) & (all_info['总市值'] >= 2000)])
+    # >2000亿 10%数量 比例
+    sz_gt2000_zd_gt10_ratio = sz_gt2000_zd_gt10 / sz_gt2000
+    # >2000亿 3%-7%数量
+    sz_gt2000_zd_gt3lt7 = len(all_info[(all_info['涨跌(%)'] >= 3) & (all_info['涨跌(%)'] <= 7) & (all_info['总市值'] >= 2000)])
+    # sz_gt2000_zd_gt10 比例
+    sz_gt2000_zd_gt3lt7_ratio = sz_gt2000_zd_gt3lt7 / sz_gt2000
+    # >2000亿 0%--3%数量
+    sz_gt2000_zd_gt0lt3 = len(all_info[(all_info['涨跌(%)'] >= 0) & (all_info['涨跌(%)'] <= 3) & (all_info['总市值'] >= 2000)])
+    # >2000亿 0%--3%数量 比例
+    sz_gt2000_zd_gt0lt3_ratio = sz_gt2000_zd_gt0lt3 / sz_gt2000
+    # >2000亿 -3%-0%%数量
+    sz_gt2000_zd_gt_3lt0 = len(all_info[(all_info['涨跌(%)'] >= -3) & (all_info['涨跌(%)'] < 0) & (all_info['总市值'] >= 2000)])
+    # >2000亿 -3%-0%%数量 比例
+    sz_gt2000_zd_gt_3lt0_ratio = sz_gt2000_zd_gt_3lt0 / sz_gt2000
+    # >2000亿 -7%-3%数量
+    sz_gt2000_zd_gt_7lt_3 = len(all_info[(all_info['涨跌(%)'] >= -7) & (all_info['涨跌(%)'] <= -3) & (all_info['总市值'] >= 2000)])
+    # >2000亿 -7%-3%数量 比例
+    sz_gt2000_zd_gt_7lt_3_ratio = sz_gt2000_zd_gt_7lt_3 / sz_gt2000
+    # >2000亿 -10%-7%数量
+    sz_gt2000_zd_gt_7lt_10 = len(all_info[(all_info['涨跌(%)'] >= -10) & (all_info['涨跌(%)'] <= -7) & (all_info['总市值'] >= 2000)])
+    # >2000亿 -10%-7%数量 比例
+    sz_gt2000_zd_gt_7lt_10_ratio = sz_gt2000_zd_gt_7lt_10 / sz_gt2000
+    # >2000亿 -10%%数量
+    sz_gt2000_zd_lt_10 = len(all_info[(all_info['涨跌(%)'] <= -10) & (all_info['总市值'] >= 2000)])
+    # >2000亿 -10%%数量 比例
+    sz_gt2000_zd_lt_10_ratio = sz_gt2000_zd_lt_10 / sz_gt2000
+    # >1000亿 总量
+    sz_gt1000 = len(all_info[(all_info['总市值'] < 2000) & (all_info['总市值'] >= 1000)])
+    # >1000亿 10%数量
+    sz_gt1000_zd_gt10 = len(all_info[(all_info['涨跌(%)'] >= 10) & (all_info['总市值'] < 2000) & (all_info['总市值'] >= 1000)])
+    # >1000亿 10%数量 比例
+    sz_gt1000_zd_gt10_ratio = sz_gt1000_zd_gt10 / sz_gt1000
+    # >1000亿 7%--3%数量
+    sz_gt1000_zd_lt7gt3 = len(all_info[(all_info['涨跌(%)'] >= 3) & (all_info['涨跌(%)'] <= 7) & (all_info['总市值'] < 2000) & (all_info['总市值'] >= 1000)])
+    # >1000亿 7%--3%数量 比例
+    sz_gt1000_zd_lt7gt3_ratio = sz_gt1000_zd_lt7gt3 / sz_gt1000
+    # >1000亿 0%--3%数量
+    sz_gt1000_zd_gt0lt3 = len(all_info[(all_info['涨跌(%)'] >= 0) & (all_info['涨跌(%)'] <= 3) & (all_info['总市值'] < 2000) & (all_info['总市值'] >= 1000)])
+    # >1000亿 0%--3%数量 比例
+    sz_gt1000_zd_gt0lt3_ratio = sz_gt1000_zd_gt0lt3 / sz_gt1000
+    # >1000亿 -3%-0%%数量
+    sz_gt1000_zd_gt_3lt0 = len(all_info[(all_info['涨跌(%)'] >= -3) & (all_info['涨跌(%)'] < 0) & (all_info['总市值'] < 2000) & (all_info['总市值'] >= 1000)])
+    # >1000亿 -3%-0%%数量 比例
+    sz_gt1000_zd_gt_3lt0_ratio = sz_gt1000_zd_gt_3lt0 / sz_gt1000
+    # >1000亿 -7%-3%数量
+    sz_gt1000_zd_gt_7lt_3 = len(all_info[(all_info['涨跌(%)'] >= -7) & (all_info['涨跌(%)'] <= -3) & (all_info['总市值'] < 2000) & (all_info['总市值'] >= 1000)])
+    # >1000亿 -7%-3%数量 比例
+    sz_gt1000_zd_gt_7lt_3_ratio = sz_gt1000_zd_gt_7lt_3 / sz_gt1000
+    # >1000亿 -10%-7%数量
+    sz_gt1000_zd_gt_7lt_10 = len(all_info[(all_info['涨跌(%)'] >= -10) & (all_info['涨跌(%)'] <= -7) & (all_info['总市值'] < 2000) & (all_info['总市值'] >= 1000)])
+    # >1000亿 -10%-7%数量 比例
+    sz_gt1000_zd_gt_7lt_10_ratio = sz_gt1000_zd_gt_7lt_10 / sz_gt1000
+    # >1000亿 -10%%数量
+    sz_gt1000_zd_lt_10 = len(all_info[(all_info['涨跌(%)'] <= -10) & (all_info['总市值'] < 2000) & (all_info['总市值'] >= 1000)])
+    # >1000亿 -10%%数量 比例
+    sz_gt1000_zd_lt_10_ratio = sz_gt1000_zd_lt_10 / sz_gt1000
+    # >500亿 总量
+    sz_gt500 = len(all_info[(all_info['总市值'] < 1000) & (all_info['总市值'] >= 500)])
+    # >500亿 10%数量
+    sz_gt500_zd_gt10 = len(all_info[(all_info['涨跌(%)'] >= 10) & (all_info['总市值'] < 1000) & (all_info['总市值'] >= 500)])
+    # >500亿 10%数量 比例
+    sz_gt500_zd_gt10_ratio = sz_gt500_zd_gt10 / sz_gt500
+    # >500亿 7%--3%数量
+    sz_gt500_zd_lt7gt3 = len(all_info[(all_info['涨跌(%)'] >= 3) & (all_info['涨跌(%)'] <= 7) & (all_info['总市值'] < 1000) & (all_info['总市值'] >= 500)])
+    # >500亿 7%--3%数量 比例
+    sz_gt500_zd_lt7gt3_ratio = sz_gt500_zd_lt7gt3 / sz_gt500
+    # >500亿 0%--3%数量
+    sz_gt500_zd_gt0lt3 = len(all_info[(all_info['涨跌(%)'] >= 0) & (all_info['涨跌(%)'] <= 3) & (all_info['总市值'] < 1000) & (all_info['总市值'] >= 500)])
+    # >500亿 0%--3%数量 比例
+    sz_gt500_zd_gt0lt3_ratio = sz_gt500_zd_gt0lt3 / sz_gt500
+    # >500亿 -3%-0%%数量
+    sz_gt500_zd_gt_3lt0 = len(all_info[(all_info['涨跌(%)'] >= -3) & (all_info['涨跌(%)'] < 0) & (all_info['总市值'] < 1000) & (all_info['总市值'] >= 500)])
+    # >500亿 -3%-0%%数量 比例
+    sz_gt500_zd_gt_3lt0_ratio = sz_gt500_zd_gt_3lt0 / sz_gt500
+    # >500亿 -7%-3%数量
+    sz_gt500_zd_gt_7lt_3 = len(all_info[(all_info['涨跌(%)'] >= -7) & (all_info['涨跌(%)'] <= -3) & (all_info['总市值'] < 1000) & (all_info['总市值'] >= 500)])
+    # >500亿 -7%-3%数量 比例
+    sz_gt500_zd_gt_7lt_3_ratio = sz_gt500_zd_gt_7lt_3 / sz_gt500
+    # >500亿 -10%-7%数量
+    sz_gt500_zd_gt_7lt_10 = len(all_info[(all_info['涨跌(%)'] >= -10) & (all_info['涨跌(%)'] <= -7) & (all_info['总市值'] < 1000) & (all_info['总市值'] >= 500)])
+    # >500亿 -10%-7%数量 比例
+    sz_gt500_zd_gt_7lt_10_ratio = sz_gt500_zd_gt_7lt_10 / sz_gt500
+    # >500亿 -10%%数量
+    sz_gt500_zd_lt_10 = len(all_info[(all_info['涨跌(%)'] <= -10) & (all_info['总市值'] < 1000) & (all_info['总市值'] >= 500)])
+    # >500亿 -10%%数量 比例
+    sz_gt500_zd_lt_10_ratio = sz_gt500_zd_lt_10 / sz_gt500
+    # >100亿 总量
+    sz_gt100 = len(all_info[all_info['总市值'] >= 100])
+    # >100亿 10%数量
+    sz_gt100_zd_gt10 = len(all_info[(all_info['涨跌(%)'] >= 10) & (all_info['总市值'] >= 100)])
+    # >100亿 10%数量 比例
+    sz_gt100_zd_gt10_ratio = sz_gt100_zd_gt10 / sz_gt100
+    # >100亿 3%-7%数量
+    sz_gt100_zd_gt3lt7 = len(all_info[(all_info['涨跌(%)'] >= 3) & (all_info['涨跌(%)'] <= 7) & (all_info['总市值'] >= 100)])
+    # >100亿 3%-7%数量 比例
+    sz_gt100_zd_gt3lt7_ratio = sz_gt100_zd_gt3lt7 / sz_gt100
+    # >100亿 0%--3%数量
+    sz_gt100_zd_gt0lt3 = len(all_info[(all_info['涨跌(%)'] >= 0) & (all_info['涨跌(%)'] <= 3) & (all_info['总市值'] >= 100)])
+    # >100亿 0%--3%数量 比例
+    sz_gt100_zd_gt0lt3_ratio = sz_gt100_zd_gt0lt3 / sz_gt100
+    # >100亿 -3%-0%%数量
+    sz_gt100_zd_gt_3lt0 = len(all_info[(all_info['涨跌(%)'] >= -3) & (all_info['涨跌(%)'] < 0) & (all_info['总市值'] >= 100)])
+    # >100亿 -3%-0%%数量 比例
+    sz_gt100_zd_gt_3lt0_ratio = sz_gt100_zd_gt_3lt0 / sz_gt100
+    # >100亿 -7%-3%数量
+    sz_gt100_zd_gt_7lt_3 = len(all_info[(all_info['涨跌(%)'] >= -7) & (all_info['涨跌(%)'] <= -3) & (all_info['总市值'] >= 100)])
+    # >100亿 -7%-3%数量 比例
+    sz_gt100_zd_gt_7lt_3_ratio = sz_gt100_zd_gt_7lt_3 / sz_gt100
+    # >100亿 -10%-7%数量
+    sz_gt100_zd_gt_7lt_10 = len(all_info[(all_info['涨跌(%)'] >= -10) & (all_info['涨跌(%)'] <= -7) & (all_info['总市值'] >= 100)])
+    # >100亿 -10%-7%数量 比例
+    sz_gt100_zd_gt_7lt_10_ratio = sz_gt100_zd_gt_7lt_10 / sz_gt100
+    # >100亿 -10%%数量
+    sz_gt100_zd_lt_10 = len(all_info[(all_info['涨跌(%)'] <= -10) & (all_info['总市值'] >= 100)])
+    # >100亿 -10%%数量 比例
+    sz_gt100_zd_lt_10_ratio = sz_gt100_zd_lt_10 / sz_gt100
+    # 50-100亿 总量
+    sz_gt50lt100 = len(all_info[(all_info['总市值'] < 100) & (all_info['总市值'] >= 50)])
+    # 50-100亿 10%数量
+    sz_gt50lt100_zd_gt10 = len(all_info[(all_info['涨跌(%)'] >= 10) & (all_info['总市值'] < 100) & (all_info['总市值'] >= 50)])
+    # 50-100亿 10%数量 比例
+    sz_gt50lt100_zd_gt10_ratio = sz_gt50lt100_zd_gt10 / sz_gt50lt100
+    # 50-100亿 7%--3%数量
+    sz_gt50lt100_zd_lt7gt3 = len(all_info[(all_info['涨跌(%)'] >= 3) & (all_info['涨跌(%)'] <= 7) & (all_info['总市值'] >= 50) & (all_info['总市值'] < 100)])
+    # 50-100亿 7%--3%数量 比例
+    sz_gt50lt100_zd_lt7gt3_ratio = sz_gt50lt100_zd_lt7gt3 / sz_gt50lt100
+    # 50-100亿 0%--3%数量
+    sz_gt50lt100_zd_gt0lt3 = len(all_info[(all_info['涨跌(%)'] >= 0) & (all_info['涨跌(%)'] <= 3) & (all_info['总市值'] >= 50) & (all_info['总市值'] < 100)])
+    # 50-100亿 0%--3%数量 比例
+    sz_gt50lt100_zd_gt0lt3_ratio = sz_gt50lt100_zd_gt0lt3 / sz_gt50lt100
+    # 50-100亿 -3%-0%%数量
+    sz_gt50lt100_zd_gt_3lt0 = len(all_info[(all_info['涨跌(%)'] >= -3) & (all_info['涨跌(%)'] < 0) & (all_info['总市值'] >= 50) & (all_info['总市值'] < 100)])
+    # 50-100亿 -3%-0%%数量 比例
+    sz_gt50lt100_zd_gt_3lt0_ratio = sz_gt50lt100_zd_gt_3lt0 / sz_gt50lt100
+    # 50-100亿 -7%-3%数量
+    sz_gt50lt100_zd_gt_7lt_3 = len(all_info[(all_info['涨跌(%)'] >= -7) & (all_info['涨跌(%)'] <= -3) & (all_info['总市值'] >= 50) & (all_info['总市值'] < 100)])
+    # 50-100亿 -7%-3%数量 比例
+    sz_gt50lt100_zd_gt_7lt_3_ratio = sz_gt50lt100_zd_gt_7lt_3 / sz_gt50lt100
+    # 50-100亿 -10%-7%数量
+    sz_gt50lt100_zd_gt_7lt_10 = len(all_info[(all_info['涨跌(%)'] >= -10) & (all_info['涨跌(%)'] <= -7) & (all_info['总市值'] >= 50) & (all_info['总市值'] < 100)])
+    # 50-100亿 -10%-7%数量 比例
+    sz_gt50lt100_zd_gt_7lt_10_ratio = sz_gt50lt100_zd_gt_7lt_10 / sz_gt50lt100
+    # 50-100亿 -10%%数量
+    sz_gt50lt100_zd_lt_10 = len(all_info[(all_info['涨跌(%)'] < -10) & (all_info['总市值'] > 50) & (all_info['总市值'] < 100)])
+    # 50-100亿 -10%%数量 比例
+    sz_gt50lt100_zd_lt_10_ratio = sz_gt50lt100_zd_lt_10 / sz_gt50lt100
+    # <50亿 总量
+    sz_lt50 = len(all_info[all_info['总市值'] < 50])
+    # <50亿 10%数量
+    sz_lt50_zd_gt10 = len(all_info[(all_info['涨跌(%)'] >= 10) & (all_info['总市值'] <= 50)])
+    # <50亿 10%数量 比例
+    sz_lt50_zd_gt10_ratio = sz_lt50_zd_gt10 / sz_lt50
+
+    # <50亿 7%--3%数量
+    sz_lt50_zd_lt7gt3 = len(all_info[(all_info['涨跌(%)'] > 3) & (all_info['涨跌(%)'] < 7) & (all_info['总市值'] < 50)])
+    # <50亿 7%--3%数量 比例
+    sz_lt50_zd_lt7gt3_ratio = sz_lt50_zd_lt7gt3 / sz_lt50
+    # <50亿 0%--3%数量
+    sz_lt50_zd_gt0lt3 = len(all_info[(all_info['涨跌(%)'] > 0) & (all_info['涨跌(%)'] < 3) & (all_info['总市值'] < 50)])
+    # <50亿 0%--3%数量 比例
+    sz_lt50_zd_gt0lt3_ratio = sz_lt50_zd_gt0lt3 / sz_lt50
+    # <50亿 -3%-0%%数量
+    sz_lt50_zd_gt_3lt0 = len(all_info[(all_info['涨跌(%)'] > -3) & (all_info['涨跌(%)'] < 0) & (all_info['总市值'] < 50)])
+    # <50亿 -3%-0%%数量 比例
+    sz_lt50_zd_gt_3lt0_ratio = sz_lt50_zd_gt_3lt0 / sz_lt50
+    # <50亿 -7%-3%数量
+    sz_lt50_zd_gt_7lt_3 = len(all_info[(all_info['涨跌(%)'] > -7) & (all_info['涨跌(%)'] < -3) & (all_info['总市值'] < 50)])
+    # <50亿 -7%-3%数量 比例
+    sz_lt50_zd_gt_7lt_3_ratio = sz_lt50_zd_gt_7lt_3 / sz_lt50
+    # <50亿 -10%-7%数量
+    sz_lt50_zd_gt_7lt_10 = len(all_info[(all_info['涨跌(%)'] > -10) & (all_info['涨跌(%)'] < -7) & (all_info['总市值'] < 50)])
+    # <50亿 -10%-7%数量 比例
+    sz_lt50_zd_gt_7lt_10_ratio = sz_lt50_zd_gt_7lt_10 / sz_lt50
+    # <50亿 -10%%数量
+    sz_lt50_zd_lt_10 = len(all_info[(all_info['涨跌(%)'] < -10) & (all_info['总市值'] < 50)])
+    # <50亿 -10%%数量 比例
+    sz_lt50_zd_lt_10_ratio = sz_lt50_zd_lt_10 / sz_lt50
+    # >100亿 5%数量
+    sz_gt100_zd_gt5 = len(all_info[(all_info['涨跌(%)'] > 5) & (all_info['总市值'] > 100)])
+    # >100亿 5%数量 比例
+    sz_gt100_zd_gt5_ratio = sz_gt100_zd_gt5 / sz_gt100
+    # 50-100亿 5%数量
+    sz_gt50lt100_zd_gt5 = len(all_info[(all_info['涨跌(%)'] > 5) & (all_info['总市值'] < 100) & (all_info['总市值'] > 50)])
+    # 50-100亿 5%数量 比例
+    sz_gt50lt100_zd_gt5_ratio = sz_gt50lt100_zd_gt5 / sz_gt50lt100
+    # <50亿 5%数量
+    sz_lt50_zd_gt5 = len(all_info[(all_info['涨跌(%)'] > 5) & (all_info['总市值'] < 50)])
+    # <50亿 5%数量 比例
+    sz_lt50_zd_gt5_ratio = sz_lt50_zd_gt5 / sz_lt50
+    # >10% 数量
+    zd_gt10 = len(all_info[all_info['涨跌(%)'] > 10])
+    # >10% 数量 比例
+    zd_gt10_ratio = zd_gt10 / len(all_info)
+    # >5% 数量
+    zd_gt5 = len(all_info[all_info['涨跌(%)'] > 5])
+    # >5% 数量 比例
+    zd_gt5_ratio = zd_gt5 / len(all_info)
+    # >3% 数量
+    zd_gt3 = len(all_info[all_info['涨跌(%)'] > 3])
+    # >3% 数量 比例
+    zd_gt3_ratio = zd_gt3 / len(all_info)
+
+    # ---------------------盘后--------------------------------
+    # 5日 涨超5%数量
+    # res = wc.get(query='5日涨幅超过5%')
+    # # 5日 涨超10%数量
+    # res = wc.get(query='5日涨幅超过10%')
+    # # 跌超 10%数量
+    # zd_lt10 = all_info[all_info['涨跌(%)'] < -10]
+    return {
+        ">2000亿 总量": sz_gt2000,  # >2000亿 总量
+        ">2000亿 10%数量": sz_gt2000_zd_gt10,  # >2000亿 10%数量
+        ">2000亿 10%数量 比例": sz_gt2000_zd_gt10_ratio,  # >2000亿 10%数量 比例
+        ">2000亿 3%-7%数量": sz_gt2000_zd_gt3lt7,  # >2000亿 3%-7%数量
+        ">2000亿 3%-7%数量 比例": sz_gt2000_zd_gt3lt7_ratio,  # >2000亿 3%-7%数量 比例
+        ">2000亿 0%--3%数量": sz_gt2000_zd_gt0lt3,  # >2000亿 0%--3%数量
+        ">2000亿 0%--3%数量 比例": sz_gt2000_zd_gt0lt3_ratio,  # >2000亿 0%--3%数量 比例
+        ">2000亿 -3%-0%%数量": sz_gt2000_zd_gt_3lt0,  # >2000亿 -3%-0%%数量
+        ">2000亿 -3%-0%%数量 比例": sz_gt2000_zd_gt_3lt0_ratio,  # >2000亿 -3%-0%%数量 比例
+        ">2000亿 -7%-3%数量": sz_gt2000_zd_gt_7lt_3,  # >2000亿 -7%-3%数量
+        ">2000亿 -7%-3%数量 比例": sz_gt2000_zd_gt_7lt_3_ratio,  # >2000亿 -7%-3%数量 比例
+        ">2000亿 -10%-7%数量": sz_gt2000_zd_gt_7lt_10,  # >2000亿 -10%-7%数量
+        ">2000亿 -10%-7%数量 比例": sz_gt2000_zd_gt_7lt_10_ratio,  # >2000亿 -10%-7%数量 比例
+        ">2000亿 -10%%数量": sz_gt2000_zd_lt_10,  # >2000亿 -10%%数量
+        ">2000亿 -10%%数量 比例": sz_gt2000_zd_lt_10_ratio,  # >2000亿 -10%%数量 比例
+        ">1000亿 总量": sz_gt1000,  # >1000亿 总量
+        ">1000亿 10%数量": sz_gt1000_zd_gt10,  # >1000亿 10%数量
+        ">1000亿 10% 比例": sz_gt1000_zd_gt10_ratio,  # >1000亿 10%数量 比例
+        ">1000亿 7%--3%数量": sz_gt1000_zd_lt7gt3,  # >1000亿 7%--3%数量
+        ">1000亿 7%--3%数量 比例": sz_gt1000_zd_lt7gt3_ratio,  # >1000亿 7%--3%数量 比例
+        ">1000亿 0%--3%数量": sz_gt1000_zd_gt0lt3,  # >1000亿 0%--3%数量
+        ">1000亿 0%--3%数量 比例": sz_gt1000_zd_gt0lt3_ratio,  # >1000亿 0%--3%数量 比例
+        ">1000亿 -3%-0%%数量": sz_gt1000_zd_gt_3lt0,  # >1000亿 -3%-0%%数量
+        ">1000亿 -3%-0%%数量 比例": sz_gt1000_zd_gt_3lt0_ratio,  # >1000亿 -3%-0%%数量 比例
+        ">1000亿 -7%-3%数量": sz_gt1000_zd_gt_7lt_3,  # >1000亿 -7%-3%数量
+        ">1000亿 -7%-3%数量 比例": sz_gt1000_zd_gt_7lt_3_ratio,  # >1000亿 -7%-3%数量 比例
+        ">1000亿 -10%-7%数量": sz_gt1000_zd_gt_7lt_10,  # >1000亿 -10%-7%数量
+        ">1000亿 -10%-7%数量 比例": sz_gt1000_zd_gt_7lt_10_ratio,  # >1000亿 -10%-7%数量 比例
+        ">1000亿 -10%%数量": sz_gt1000_zd_lt_10,  # >1000亿 -10%%数量
+        ">1000亿 -10%%数量 比例": sz_gt1000_zd_lt_10_ratio,  # >1000亿 -10%%数量 比例
+        ">500亿 总量": sz_gt500,  # >500亿 总量
+        ">500亿 10%数量": sz_gt500_zd_gt10,  # >500亿 10%数量
+        ">500亿 10%数量 比例": sz_gt500_zd_gt10_ratio,  # >500亿 10%数量 比例
+        ">500亿 7%--3%数量": sz_gt500_zd_lt7gt3,  # >500亿 7%--3%数量
+        ">500亿 7%--3%数量 比例": sz_gt500_zd_lt7gt3_ratio,  # >500亿 7%--3%数量 比例
+        ">500亿 0%--3%数量": sz_gt500_zd_gt0lt3,  # >500亿 0%--3%数量
+        ">500亿 0%--3%数量 比例": sz_gt500_zd_gt0lt3_ratio,  # >500亿 0%--3%数量 比例
+        ">500亿 -3%-0%%数量": sz_gt500_zd_gt_3lt0,  # >500亿 -3%-0%%数量
+        ">500亿 -3%-0%%数量 比例": sz_gt500_zd_gt_3lt0_ratio,  # >500亿 -3%-0%%数量 比例
+        ">500亿 -7%-3%数量": sz_gt500_zd_gt_7lt_3,  # >500亿 -7%-3%数量
+        ">500亿 -7%-3%数量 比例": sz_gt500_zd_gt_7lt_3_ratio,  # >500亿 -7%-3%数量 比例
+        ">500亿 -10%-7%数量": sz_gt500_zd_gt_7lt_10,  # >500亿 -10%-7%数量
+        ">500亿 -10%-7%数量 比例": sz_gt500_zd_gt_7lt_10_ratio,  # >500亿 -10%-7%数量 比例
+        ">500亿 -10%%数量": sz_gt500_zd_lt_10,  # >500亿 -10%%数量
+        ">500亿 -10%%数量 比例": sz_gt500_zd_lt_10_ratio,  # >500亿 -10%%数量 比例
+        ">100亿 总量": sz_gt100,  # >100亿 总量
+        ">100亿 10%数量": sz_gt100_zd_gt10,  # >100亿 10%数量
+        ">100亿 10%数量 比例": sz_gt100_zd_gt10_ratio,  # >100亿 10%数量 比例
+        ">100亿 3%-7%数量": sz_gt100_zd_gt3lt7,  # >100亿 3%-7%数量
+        ">100亿 3%-7%数量 比例": sz_gt100_zd_gt3lt7_ratio,  # >100亿 3%-7%数量 比例
+        ">100亿 0%--3%数量": sz_gt100_zd_gt0lt3,  # >100亿 0%--3%数量
+        ">100亿 0%--3%数量 比例": sz_gt100_zd_gt0lt3_ratio,  # >100亿 0%--3%数量 比例
+        ">100亿 -3%-0%%数量": sz_gt100_zd_gt_3lt0,  # >100亿 -3%-0%%数量
+        ">100亿 -3%-0%%数量 比例": sz_gt100_zd_gt_3lt0_ratio,  # >100亿 -3%-0%%数量 比例
+        ">100亿 -7%-3%数量": sz_gt100_zd_gt_7lt_3,  # >100亿 -7%-3%数量
+        ">100亿 -7%-3%数量 比例": sz_gt100_zd_gt_7lt_3_ratio,  # >100亿 -7%-3%数量 比例
+        ">100亿 -10%-7%数量": sz_gt100_zd_gt_7lt_10,  # >100亿 -10%-7%数量
+        ">100亿 -10%-7%数量 比例": sz_gt100_zd_gt_7lt_10_ratio,  # >100亿 -10%-7%数量 比例
+        ">100亿 -10%%数量": sz_gt100_zd_lt_10,  # >100亿 -10%%数量
+        ">100亿 -10%%数量 比例": sz_gt100_zd_lt_10_ratio,  # >100亿 -10%%数量 比例
+        "50-100亿 总量": sz_gt50lt100,  # 50-100亿 总量
+        "50-100亿 10%数量": sz_gt50lt100_zd_gt10,  # 50-100亿 10%数量
+        "50-100亿 10%数量 比例": sz_gt50lt100_zd_gt10_ratio,  # 50-100亿 10%数量 比例
+        "50-100亿 7%--3%数量": sz_gt50lt100_zd_lt7gt3,  # 50-100亿 7%--3%数量
+        "50-100亿 7%--3%数量 比例": sz_gt50lt100_zd_lt7gt3_ratio,  # 50-100亿 7%--3%数量 比例
+        "50-100亿 0%--3%数量": sz_gt50lt100_zd_gt0lt3,  # 50-100亿 0%--3%数量
+        "50-100亿 0%--3%数量 比例": sz_gt50lt100_zd_gt0lt3_ratio,  # 50-100亿 0%--3%数量 比例
+        "50-100亿 -3%-0%%数量": sz_gt50lt100_zd_gt_3lt0,  # 50-100亿 -3%-0%%数量
+        "50-100亿 -3%-0%%数量 比例": sz_gt50lt100_zd_gt_3lt0_ratio,  # 50-100亿 -3%-0%%数量 比例
+        "50-100亿 -7%-3%数量": sz_gt50lt100_zd_gt_7lt_3,  # 50-100亿 -7%-3%数量
+        "50-100亿 -7%-3%数量 比例": sz_gt50lt100_zd_gt_7lt_3_ratio,  # 50-100亿 -7%-3%数量 比例
+        "50-100亿 -10%-7%数量": sz_gt50lt100_zd_gt_7lt_10,  # 50-100亿 -10%-7%数量
+        "50-100亿 -10%-7%数量 比例": sz_gt50lt100_zd_gt_7lt_10_ratio,  # 50-100亿 -10%-7%数量 比例
+        "50-100亿 -10%%数量": sz_gt50lt100_zd_lt_10,  # 50-100亿 -10%%数量
+        "50-100亿 -10%%数量 比例": sz_gt50lt100_zd_lt_10_ratio,  # 50-100亿 -10%%数量 比例
+        "<50亿 总量": sz_lt50,  # <50亿 总量
+        "<50亿 10%数量": sz_lt50_zd_gt10,  # <50亿 10%数量
+        "<50亿 10%数量 比例": sz_lt50_zd_gt10_ratio,  # <50亿 10%数量 比例
+        "<50亿 7%--3%数量": sz_lt50_zd_lt7gt3,  # <50亿 7%--3%数量
+        "<50亿 7%--3%数量 比例": sz_lt50_zd_lt7gt3_ratio,  # <50亿 7%--3%数量 比例
+        "<50亿 0%--3%数量": sz_lt50_zd_gt0lt3,  # <50亿 0%--3%数量
+        "<50亿 0%--3%数量 比例": sz_lt50_zd_gt0lt3_ratio,  # <50亿 0%--3%数量 比例
+        "<50亿 -3%-0%%数量": sz_lt50_zd_gt_3lt0,  # <50亿 -3%-0%%数量
+        "<50亿 -3%-0%%数量 比例": sz_lt50_zd_gt_3lt0_ratio,  # <50亿 -3%-0%%数量 比例
+        "<50亿 -7%-3%数量": sz_lt50_zd_gt_7lt_3,  # <50亿 -7%-3%数量
+        "<50亿 -7%-3%数量 比例": sz_lt50_zd_gt_7lt_3_ratio,  # <50亿 -7%-3%数量 比例
+        "<50亿 -10%-7%数量": sz_lt50_zd_gt_7lt_10,  # <50亿 -10%-7%数量
+        "<50亿 -10%-7%数量 比例": sz_lt50_zd_gt_7lt_10_ratio,  # <50亿 -10%-7%数量 比例
+        "<50亿 -10%%数量": sz_lt50_zd_lt_10,  # <50亿 -10%%数量
+        "<50亿 -10%%数量 比例": sz_lt50_zd_lt_10_ratio,  # <50亿 -10%%数量 比例
+        ">100亿 5%数量": sz_gt100_zd_gt5,  # >100亿 5%数量
+        ">100亿 5%数量 比例": sz_gt100_zd_gt5_ratio,  # >100亿 5%数量 比例
+        "50-100亿 5%数量": sz_gt50lt100_zd_gt5,  # 50-100亿 5%数量
+        "50-100亿 5%数量 比例": sz_gt50lt100_zd_gt5_ratio,  # 50-100亿 5%数量 比例
+        "<50亿 5%数量": sz_lt50_zd_gt5,  # <50亿 5%数量
+        "<50亿 5%数量 比例": sz_lt50_zd_gt5_ratio,  # <50亿 5%数量 比例
+        ">10% 数量": zd_gt10,  # >10% 数量
+        ">10% 数量 比例": zd_gt10_ratio,  # >10% 数量 比例
+        ">5% 数量": zd_gt5,  # >5% 数量
+        ">5% 数量 比例": zd_gt5_ratio,  # >5% 数量 比例
+        ">3% 数量": zd_gt3,  # >3% 数量
+        ">3% 数量 比例": zd_gt3_ratio  # >3% 数量 比例
+    }
+
 def watch_data_history():
     # 获取所有信息
-
     while True:
         try:
             watch_code_list = pgsql.get_db().query(WatchCode).all()
@@ -689,37 +1008,14 @@ def watch_data_history():
 
             pgsql.create(WaitBuyList(code=code, market=code[:2]))
         except Exception as e:
-            # print(e)
-            # print(traceback.print_exc())
-            pass
-        t.sleep(600)
-
-def watch_data_history():
-    # 获取所有信息
-
-    while True:
-        try:
-            watch_code_list = pgsql.get_db().query(WatchCode).all()
-            watch_code_list = [i.code.split(".")[-1].lower()+i.code.split(".")[0] for i in watch_code_list]
-            all_info = pd.DataFrame(quotation.stocks(watch_code_list, prefix=True)).T
-            # all_info[all_info['涨跌(%)']>1 & all_info['close']< all_info['open']]
-            # all_info[(all_info['涨跌(%)'] > 1) & (all_info['close'] < all_info['open'])]
-            # all_info[(all_info['涨跌(%)'] > 1) & (all_info['close'] < all_info['open'])].sort_values(by='振幅', ascending=False)
-            code = all_info[(all_info['涨跌(%)'] > 1) & (all_info['close'] < all_info['open'])].sort_values(by='振幅', ascending=False).iloc[1, :].code
-
-            pgsql.create(WaitBuyList(code=code, market=code[:2]))
-        except Exception as e:
-            # print(e)
-            # print(traceback.print_exc())
-            pass
+            print(traceback.print_exc())
         t.sleep(600)
 
 if __name__ == '__main__':
-    # analyse()
     message_queue = queue.Queue()
     brain_thread_list = []
     brain_thread_list.append(threading.Thread(target=brain_analyse_SH, args=()))           # 主力资金
-    brain_thread_list.append(threading.Thread(target=watch_data_history, args=()))                 # 监控数据
+    brain_thread_list.append(threading.Thread(target=watch_data, args=()))                 # 监控数据
     brain_thread_list.append(threading.Thread(target=watch_data_history, args=()))                 # 监控数据
     brain_thread_list.append(threading.Thread(target=download_png_csv, args=()))           # 收集数据
     brain_thread_list.append(threading.Thread(target=wencai_, args=()))             # 问财
