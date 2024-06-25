@@ -139,7 +139,7 @@ threading.Thread(target=watch_market, args=()).start()
 
 question_list = [
     '剔除ST,准备拉升',
-    '主力资金流入,剔除ST,剔除次新,剔除北交所,拉升通道',
+    '主力资金流入,剔除ST,剔除次新,剔除北交所,形成拉升通道',
 ]
 
 watch_list = []

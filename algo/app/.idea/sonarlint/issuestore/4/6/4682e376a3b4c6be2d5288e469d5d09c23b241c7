@@ -1,44 +1,0 @@
-
-wpython:S15429"SRename function "calculateMACD" to match the regular expression ^[a-z_][a-z0-9_]*$.(“Òîâúÿÿÿÿ8ê¶õ©æ1
-upython:S116N"RRename this field "RSI_period" to match the regular expression ^[_a-z][_a-z0-9]*$.(ÑÖ˜þÿÿÿÿ8ê¶õ©æ1
-zpython:S116F"WRename this field "Fmin_price_list" to match the regular expression ^[_a-z][_a-z0-9]*$.(Óßýÿÿÿÿ8ê¶õ©æ1
-wpython:S116P"TRename this field "RSI_data_buy" to match the regular expression ^[_a-z][_a-z0-9]*$.(÷Œ¾Ãùÿÿÿÿ8ê¶õ©æ1
-xpython:S116O"URename this field "RSI_data_sell" to match the regular expression ^[_a-z][_a-z0-9]*$.(“åÄ¯ùÿÿÿÿ8ê¶õ©æ1
-~python:S116G"[Rename this field "Fmin_big_price_list" to match the regular expression ^[_a-z][_a-z0-9]*$.(àí¦Ûûÿÿÿÿ8ê¶õ©æ1
-ˆpython:S101B"eRename class "timeDecided" to match the regular expression ^_?([A-Z_][a-zA-Z0-9]*|[a-z_][a-z0-9_]*)$.(€üÝèúÿÿÿÿ8ê¶õ©æ1
-rpython:S117R"TRename this parameter "priceObj" to match the regular expression ^[_a-z][a-z0-9_]*$.(Åæ”¤8ê¶õ©æ1
-hpython:S100R"JRename method "addObj" to match the regular expression ^[a-z_][a-z0-9_]*$.(Åæ”¤8ë¶õ©æ1
-Upython:S1481w"6Remove the unused local variable "transaction_volume".(ÝêÓþ8ë¶õ©æ1
-=python:S125t"Remove this commented out code.(õá·á8ë¶õ©æ1
-Cpython:S125•"Remove this commented out code.(Ûû«Ëÿÿÿÿÿ8ë¶õ©æ1
-kpython:S117û"MRename this parameter "C" to match the regular expression ^[_a-z][a-z0-9_]*$.(Þ«•\8ë¶õ©æ1
-Opython:S1481€"/Replace unused local variable "deals" with "_".(ÂåÀÏ8ë¶õ©æ1
-Rpython:S1481€"2Replace unused local variable "accounts" with "_".(ÂåÀÏ8ë¶õ©æ1
-Spython:S1481€"3Replace unused local variable "positions" with "_".(ÂåÀÏ8ë¶õ©æ1
-Ppython:S1481€"0Replace unused local variable "orders" with "_".(ÂåÀÏ8ë¶õ©æ1
-upython:S117ß"VRename this local variable "A_all" to match the regular expression ^[_a-z][a-z0-9_]*$.(–›Ô8ë¶õ©æ1
-lpython:S117Ä"MRename this parameter "C" to match the regular expression ^[_a-z][a-z0-9_]*$.(½—Í±8í¶õ©æ1
-[python:S1481Ù"6Remove the unused local variable "north_finance_info".(Þ¢ùÓþÿÿÿÿ8í¶õ©æ1
-Jpython:S1481×"*Remove the unused local variable "result".(ô‡Ó©8í¶õ©æ1
-Vpython:S1481è"6Remove the unused local variable "transaction_volume".(ÝÁÑÒ8í¶õ©æ1
-tpython:S3776Ä"TRefactor this function to reduce its Cognitive Complexity from 24 to the 15 allowed.(½—Í±8î¶õ©æ1
->python:S125é"Remove this commented out code.(¶ºÚÂ8î¶õ©æ1
-Ypython:S905ò":Remove or refactor this statement; it has no side effects.(­—ŠÎ8î¶õ©æ1
->python:S125”"Remove this commented out code.(£Á”Ð8ð¶õ©æ1
-qpython:S117›"MRename this parameter "C" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÉçŽŽýÿÿÿÿ8ð¶õ©æ1
-Ipython:S1172¡")Remove the unused function parameter "C".(±¦ÇÒ8ð¶õ©æ1
-lpython:S117¡"MRename this parameter "C" to match the regular expression ^[_a-z][a-z0-9_]*$.(±¦ÇÒ8ð¶õ©æ1
-=python:S125§"Remove this commented out code.(íïý:8ð¶õ©æ1
->python:S125¬"Remove this commented out code.(øÉžÇ8ð¶õ©æ1
->python:S125±"Remove this commented out code.(Áß•˜8ð¶õ©æ1
-Cpython:S125¶"Remove this commented out code.(öîŒèûÿÿÿÿ8Š·õ©æ1
-ƒpython:S3923¿"^This conditional expression returns the same value whether the condition is "true" or "false".(Œé©õûÿÿÿÿ8‹·õ©æ1
-upython:S3699Ó"PRemove this use of the output from "remove"; "remove" doesnâ€™t return anything.(ê×íÅýÿÿÿÿ8‹·õ©æ1
-@python:S6659ï" Use `not` and `startswith` here.(é”¶ö8Œ·õ©æ1
-\python:S5754ò"<Specify an exception class to catch or reraise the exception(ˆÊÉ·8Œ·õ©æ1
-Xpython:S1172÷"3Remove the unused function parameter "ContextInfo".(ë­þÞÿÿÿÿÿ8Œ·õ©æ1
-{python:S117÷"WRename this parameter "ContextInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(ë­þÞÿÿÿÿÿ8Œ·õ©æ1
-{python:S117÷"WRename this parameter "accountInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(ë­þÞÿÿÿÿÿ8Œ·õ©æ1
-Xpython:S1172ü"3Remove the unused function parameter "ContextInfo".(ªøùÿÿÿÿ8Œ·õ©æ1
-{python:S117ü"WRename this parameter "ContextInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(ªøùÿÿÿÿ8Œ·õ©æ1
-xpython:S117ü"TRename this parameter "dealInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(ªøùÿÿÿÿ8Œ·õ©æ1

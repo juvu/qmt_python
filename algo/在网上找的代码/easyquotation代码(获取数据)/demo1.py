@@ -353,6 +353,7 @@ def download_data():
     csv_file_path = 'demo.csv'
     df.to_csv(csv_file_path, index=False, mode='a', header=False)
     # df.to_csv(csv_file_path, index=False)
+    print('Done')
 
 
 while True:

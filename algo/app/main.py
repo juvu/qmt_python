@@ -18,8 +18,8 @@ from selenium.webdriver.common.by import By
 import traceback
 import easyquotation
 
-from algo.app.databasetool import pgsql
-from algo.app.databasetool.pgsql import WatchCode, WaitBuyList
+from algo.app.db import pgsql
+from algo.app.db.pgsql import WatchCode, WaitBuyList
 
 quotation = easyquotation.use('tencent')
 from bs4 import BeautifulSoup
@@ -31,7 +31,7 @@ import logging
 
 from fastapi.staticfiles import StaticFiles
 
-from routers import items
+from api.endpoints import items, users
 
 logging.basicConfig(
     level=logging.NOTSET,
@@ -41,6 +41,7 @@ logging.basicConfig(
 wc_cookie = 'other_uid=Ths_iwencai_Xuangu_vt1m3hjjud764awfezv3ezly4t2f9xco; ta_random_userid=38r3s4iaao; PHPSESSID=670fb84a8754b3555e226c6b40c1d831; cid=670fb84a8754b3555e226c6b40c1d8311712721082; ComputerID=670fb84a8754b3555e226c6b40c1d8311712721082; WafStatus=0; u_ukey=A10702B8689642C6BE607730E11E6E4A; u_uver=1.0.0; u_dpass=HDZXnLqPSJ%2FMpvbRfnHhizBr0Y9TGLpA9wXLLjwsvQ09AWJ2DoZsyKUcGwEmAARD%2FsBAGfA5tlbuzYBqqcUNFA%3D%3D; u_did=ED35F01A88274FB59C3D3D607D30FEF0; u_ttype=WEB; ttype=WEB; user=MDptb181NjI3MjgwNzU6Ok5vbmU6NTAwOjU3MjcyODA3NTo3LDExMTExMTExMTExLDQwOzQ0LDExLDQwOzYsMSw0MDs1LDEsNDA7MSwxMDEsNDA7MiwxLDQwOzMsMSw0MDs1LDEsNDA7OCwwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMSw0MDsxMDIsMSw0MDoyNDo6OjU2MjcyODA3NToxNzEyNzIxMTIyOjo6MTYxMDkyNDk0MDo0MDAwNzg6MDoxNTljOTE4ODcwNDMzZjVlZDBhYTA5YWUzZWZiMDZhN2M6ZGVmYXVsdF80OjE%3D; userid=562728075; u_name=mo_562728075; escapename=mo_562728075; ticket=c35f5ff9817c2eee41b92f1a856ae0aa; user_status=0; utk=4261b365b2919c25775389e81aabe8e0; v=Az9jBtnQZWCRhWF8zdmzVs3XzhjMJJPPrXiXutEM2-414FHG2fQjFr1IJwbi'
 
 app = FastAPI()
+app.include_router(users.router)
 app.include_router(items.router)
 app.mount("/files", StaticFiles(directory="files"), name="static")
 public_obj = {'code_list': [],
@@ -671,7 +672,7 @@ def myAnalyse(message_queue):
 
 def start_uvicorn():
     # 注意：这里的"main:app"意味着uvicorn会从main.py文件中寻找名为app的FastAPI实例
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, log_level="info")
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
 
 
 def watch_data():

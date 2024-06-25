@@ -1,26 +1,0 @@
-
-mpython:S1192R"PDefine a constant instead of duplicating this literal 'æœ€æ–°æ¶¨è·Œå¹…' 3 times.(³çÛšùÿÿÿÿ
-Jpython:S1481$"-Remove the unused local variable "character".(Ð ŽÆþÿÿÿÿ
-qpython:S3776D"TRefactor this function to reduce its Cognitive Complexity from 30 to the 15 allowed.(æúãÏùÿÿÿÿ
-Jpython:S1481l"-Remove the unused local variable "code_info".(ŠšÍ‚ýÿÿÿÿ
-Epython:S5603N"(Remove this unused function declaration.(´‰àÀýÿÿÿÿ
-Qpython:S905W":Remove or refactor this statement; it has no side effects.(ƒû¬÷
-6python:S125e"Remove this commented out code.(€öÏÕ
-Npython:S1481"1Remove the unused local variable "res_code_list".(³´Ü¼ÿÿÿÿÿ
-<python:S125€"Remove this commented out code.(†´Âœøÿÿÿÿ
-Opython:S1481Œ"1Remove the unused local variable "res_code_list".(³´Ü¼ÿÿÿÿÿ
-<python:S125"Remove this commented out code.(†´Âœøÿÿÿÿ
-7python:S125¿"Remove this commented out code.( ËØÄ
-tpython:S1186Â"[Add a nested comment explaining why this function is empty, or complete the implementation.(¬„ý
-spython:S1186Æ"[Add a nested comment explaining why this function is empty, or complete the implementation.(ªËÊ4
-opython:S1542Ê"VRename function "brain_analyse_BX" to match the regular expression ^[a-z_][a-z0-9_]*$.(²»Èœ
-tpython:S1542Ñ"VRename function "brain_analyse_CY" to match the regular expression ^[a-z_][a-z0-9_]*$.(ÒÄ¿þûÿÿÿÿ
-opython:S1542Ø"VRename function "brain_analyse_SH" to match the regular expression ^[a-z_][a-z0-9_]*$.(ûÅ¦„
-7python:S125ó"Remove this commented out code.(Å¬¥È
-7python:S125Œ"Remove this commented out code.(ÊÃ€É
-Jpython:S1481³",Remove the unused local variable "response".(¬ý½Ôýÿÿÿÿ
-gpython:S1542Ò"NRename function "myServer" to match the regular expression ^[a-z_][a-z0-9_]*$.(¯‰
-mpython:S1542à"ORename function "myAnalyse" to match the regular expression ^[a-z_][a-z0-9_]*$.(îÒ“åûÿÿÿÿ
-<python:S125î"Remove this commented out code.(ù‚ÊÛúÿÿÿÿ
-<python:S125ó"Remove this commented out code.(É±–åþÿÿÿÿ
-<python:S125"Remove this commented out code.(›Ñô•üÿÿÿÿ

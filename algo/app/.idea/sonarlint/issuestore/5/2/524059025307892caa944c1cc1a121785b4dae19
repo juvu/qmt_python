@@ -1,30 +1,0 @@
-
-upython:S1173"WRename this parameter "ContextInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(ƒÖÛ–8ÕÂö©æ1
-Lpython:S1481:"-Remove the unused local variable "json_data".(˜½• 8ÖÂö©æ1
-zpython:S117H"WRename this parameter "ContextInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(£ÔµÃûÿÿÿÿ8ÖÂö©æ1
-zpython:S117R"WRename this local variable "Result" to match the regular expression ^[_a-z][a-z0-9_]*$.(âÀ•æşÿÿÿÿ8ÖÂö©æ1
-|python:S117g"YRename this local variable "askPrice" to match the regular expression ^[_a-z][a-z0-9_]*$.(À­–Âøÿÿÿÿ8ÖÂö©æ1
-zpython:S117i"WRename this local variable "askVol" to match the regular expression ^[_a-z][a-z0-9_]*$.(¡É‡òÿÿÿÿÿ8ÖÂö©æ1
-wpython:S117h"YRename this local variable "bidPrice" to match the regular expression ^[_a-z][a-z0-9_]*$.(ûƒ¸œ8ÖÂö©æ1
-xpython:S117a"ZRename this local variable "lastPrice" to match the regular expression ^[_a-z][a-z0-9_]*$.(‘¿™ˆ8ÖÂö©æ1
-Lpython:S1481a"-Remove the unused local variable "lastPrice".(‘¿™ˆ8ÖÂö©æ1
-Hpython:S1481")Remove the unused local variable "index".(¬òO8ÖÂö©æ1
-Fpython:S1481d"'Remove the unused local variable "low".(‚é£Ç8ÖÂö©æ1
-Npython:S1481e"*Remove the unused local variable "amount".(‡¦ÀÌşÿÿÿÿ8ÖÂö©æ1
-Lpython:S1481c"(Remove the unused local variable "high".(½ì«óùÿÿÿÿ8ÖÂö©æ1
-Opython:S5806b"+Rename this variable; it shadows a builtin.(ØååØıÿÿÿÿ8ÖÂö©æ1
-{python:S117±"WRename this parameter "ContextInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(ë­şŞÿÿÿÿÿ8ÖÂö©æ1
-{python:S117±"WRename this parameter "accountInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(ë­şŞÿÿÿÿÿ8ÖÂö©æ1
-Rpython:S1172¶"3Remove the unused function parameter "ContextInfo".(ÙÕù8ÖÂö©æ1
-upython:S117¶"WRename this parameter "ContextInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÙÕù8ÖÂö©æ1
-spython:S117¶"URename this parameter "orderInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÙÕù8ÖÂö©æ1
-Xpython:S1172¼"3Remove the unused function parameter "ContextInfo".(ªøùÿÿÿÿ8ÖÂö©æ1
-{python:S117¼"WRename this parameter "ContextInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(ªøùÿÿÿÿ8ÖÂö©æ1
-xpython:S117¼"TRename this parameter "dealInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(ªøùÿÿÿÿ8ÖÂö©æ1
-Spython:S1172Â"3Remove the unused function parameter "ContextInfo".(º—Ï8ÖÂö©æ1
-Qpython:S1172Â"1Remove the unused function parameter "orderArgs".(º—Ï8×Âö©æ1
-vpython:S117Â"WRename this parameter "ContextInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(º—Ï8×Âö©æ1
-tpython:S117Â"URename this parameter "orderArgs" to match the regular expression ^[_a-z][a-z0-9_]*$.(º—Ï8×Âö©æ1
-Xpython:S1172Æ"3Remove the unused function parameter "ContextInfo".(…ÏÇœúÿÿÿÿ8×Âö©æ1
-{python:S117Æ"WRename this parameter "ContextInfo" to match the regular expression ^[_a-z][a-z0-9_]*$.(…ÏÇœúÿÿÿÿ8×Âö©æ1
-vpython:S1542Æ"QRename function "myHandlebar" to match the regular expression ^[a-z_][a-z0-9_]*$.(…ÏÇœúÿÿÿÿ8×Âö©æ1
