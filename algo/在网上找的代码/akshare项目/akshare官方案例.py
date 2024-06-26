@@ -1,6 +1,17 @@
 # 文档地址
 # https://akshare.akfamily.xyz/data/stock/stock.html
 import akshare as ak
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.font_manager import FontProperties
+from datetime import datetime
+
+# 设置中文字体
+plt.rcParams['font.sans-serif'] = ['SimHei']  # 用于Linux和macOS，也可以是'SimSun'或其他支持中文的字体
+plt.rcParams['axes.unicode_minus'] = False  # 解决负号显示问题
+
+# 或者直接为特定元素设置字体
+font = FontProperties(fname=r'path_to_your_font_file.ttf', size=12)  # 替换为你的字体文件路径
 # 股票市场总貌
 
 # stock_sse_summary_df = ak.stock_sse_summary()
@@ -86,24 +97,64 @@ import akshare as ak
 # stock_margin_ratio_pa_df = ak.stock_margin_ratio_pa(date="20231013")
 # print(stock_margin_ratio_pa_df)
 # 股票热度 - 雪球-关注排行榜
-# stock_hot_follow_xq_df = ak.stock_hot_follow_xq(symbol="最热门")
-# print(stock_hot_follow_xq_df)
-# # 讨论排行榜
+stock_hot_follow_xq_df = ak.stock_hot_follow_xq(symbol="最热门")
+# for i, r in stock_hot_follow_xq_df.iterrows():
+#     data = ak.stock_cyq_em(symbol=r['股票代码'][2:], adjust="")
+#     x = np.array([str(i) for i in data['日期']])
+#     y1 = np.array([f'{round(i * 100, 2)}%' for i in data['获利比例']])
+#     plt.plot(y1, label='获利比例', color='red')
+#     # y2 = np.array([i for i in data['平均成本']])
+#     # plt.plot(x, y2, label='平均成本', color='red')
+#     # y3 = np.array([i for i in data['90成本-低']])
+#     # plt.plot(x, y3, label='90成本-低', color='green')
+#     # y4 = np.array([i for i in data['90成本-高']])
+#     # plt.plot(x, y4, label='90成本-高', color='green')
+#     y5 = np.array([i for i in data['90集中度']])
+#     plt.plot(y5, label='90集中度', color='red')
+#     # y6 = np.array([i for i in data['70成本-低']])
+#     # plt.plot(x, y6, label='70成本-低', color='red')
+#     # y7 = np.array([i for i in data['70成本-高']])
+#     # plt.plot(x, y7, label='70成本-高', color='blue')
+#     y8 = np.array([i for i in data['70集中度']])
+#     plt.plot(y8, label='70集中度', color='blue')
+#     plt.title(r['股票简称'])
+#     # plt.figure()
+#     # 添加图例
+#     # plt.legend()
+#     # 设置标题和坐标轴标签
+#     # plt.xlabel('x-axis')
+#     # plt.ylabel('y-axis')
+#
+#     # 显示网格
+#     # plt.grid(True)
+#
+#     # 显示图形
+#     plt.show()
+#     print('画完了')
+print(stock_hot_follow_xq_df)
+# 讨论排行榜
 # stock_hot_tweet_xq_df = ak.stock_hot_tweet_xq(symbol="最热门")
 # print(stock_hot_tweet_xq_df)
-# # 交易排行榜
-# stock_hot_deal_xq_df = ak.stock_hot_deal_xq(symbol="最热门")
-# print(stock_hot_deal_xq_df)
-# # 股票热度 - 问财
-# stock_hot_rank_wc_df = ak.stock_hot_rank_wc(date="20240227")
-# print(stock_hot_rank_wc_df)
-# # 股票热度 - 东财
-# # 人气榜-A股
-# stock_hot_rank_em_df = ak.stock_hot_rank_em()
-# print(stock_hot_rank_em_df)
-# # 飙升榜-A股
-# stock_hot_up_em_df = ak.stock_hot_up_em()
-# print(stock_hot_up_em_df)
+# 交易排行榜
+stock_hot_deal_xq_df = ak.stock_hot_deal_xq(symbol="最热门")
+print(stock_hot_deal_xq_df.head(50))
+# 股票热度 - 问财
+
+# 获取当前日期和时间
+now = datetime.now()
+
+# 格式化日期为"YYYYMMDD"
+formatted_date = now.strftime("%Y%m%d")
+
+stock_hot_rank_wc_df = ak.stock_hot_rank_wc(date=formatted_date)
+print(stock_hot_rank_wc_df.head(700))
+# 股票热度 - 东财
+# 人气榜-A股
+stock_hot_rank_em_df = ak.stock_hot_rank_em()
+print(stock_hot_rank_em_df)
+# 飙升榜-A股
+stock_hot_up_em_df = ak.stock_hot_up_em()
+print(stock_hot_up_em_df)
 # 连续上涨
 stock_rank_lxsz_ths_df = ak.stock_rank_lxsz_ths()
 print(stock_rank_lxsz_ths_df)

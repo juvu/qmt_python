@@ -33,11 +33,14 @@ day = now.strftime("%Y-%m-%d")
 
 from sqlalchemy import create_engine
 
+
 def print_(str):
     print(str)
-    logging.log(logging.INFO,str)
+    logging.log(logging.INFO, str)
+
 
 engine = create_engine('postgresql://postgres:123456@localhost:5432/test')
+
 
 def print__data(res):
     if res is None: return
@@ -129,13 +132,13 @@ def watch(code_list: list):
         except Exception as e:
             print_(e)
             time.sleep(60)
-    
+
+
 def watch_market():
     print_('thread watch_market is runing')
-    
-    
-threading.Thread(target=watch_market, args=()).start()
 
+
+threading.Thread(target=watch_market, args=()).start()
 
 question_list = [
     '剔除ST,准备拉升',
@@ -145,12 +148,10 @@ question_list = [
 watch_list = []
 for i in question_list:
     print(i)
-    res = question_wc(i)            # 返回需要观察的股票代码
+    res = question_wc(i)  # 返回需要观察的股票代码
     if res is not None:
         print_(res)
         watch_list = watch_list + res
         # print_(quotation.stocks(res, prefix=True))
 
-
 # threading.Thread(target=watch, args=(watch_list,)).start()
-
