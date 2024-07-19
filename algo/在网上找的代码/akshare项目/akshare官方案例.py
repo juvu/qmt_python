@@ -44,7 +44,8 @@ font = FontProperties(fname=r'path_to_your_font_file.ttf', size=12)  # 替换为
 # print(stock_ipo_benefit_ths_df)
 
 # 主营业务介绍
-# stock_zyjs_ths_df = ak.stock_zyjs_ths(symbol="000066")
+# stock_zyjs_ths_df = ak.stock_zyjs_ths(symbol="002338")
+# print("主营业务")
 # print(stock_zyjs_ths_df)
 # 千股千评
 # stock_comment_em_df = ak.stock_comment_em()
@@ -97,7 +98,7 @@ font = FontProperties(fname=r'path_to_your_font_file.ttf', size=12)  # 替换为
 # stock_margin_ratio_pa_df = ak.stock_margin_ratio_pa(date="20231013")
 # print(stock_margin_ratio_pa_df)
 # 股票热度 - 雪球-关注排行榜
-stock_hot_follow_xq_df = ak.stock_hot_follow_xq(symbol="最热门")
+# stock_hot_follow_xq_df = ak.stock_hot_follow_xq(symbol="最热门")
 # for i, r in stock_hot_follow_xq_df.iterrows():
 #     data = ak.stock_cyq_em(symbol=r['股票代码'][2:], adjust="")
 #     x = np.array([str(i) for i in data['日期']])
@@ -131,7 +132,7 @@ stock_hot_follow_xq_df = ak.stock_hot_follow_xq(symbol="最热门")
 #     # 显示图形
 #     plt.show()
 #     print('画完了')
-print(stock_hot_follow_xq_df)
+# print(stock_hot_follow_xq_df)
 # 讨论排行榜
 # stock_hot_tweet_xq_df = ak.stock_hot_tweet_xq(symbol="最热门")
 # print(stock_hot_tweet_xq_df)
@@ -147,7 +148,8 @@ now = datetime.now()
 formatted_date = now.strftime("%Y%m%d")
 
 stock_hot_rank_wc_df = ak.stock_hot_rank_wc(date=formatted_date)
-print(stock_hot_rank_wc_df.head(700))
+# print(stock_hot_rank_wc_df.head(700))
+print(stock_hot_rank_wc_df.head(70))
 # 股票热度 - 东财
 # 人气榜-A股
 stock_hot_rank_em_df = ak.stock_hot_rank_em()
