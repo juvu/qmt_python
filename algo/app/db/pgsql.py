@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
 
+from dotenv import load_dotenv
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, ForeignKey, DateTime
 # 使用SQLAlchemy的DeclarativeBase来定义模型
 from sqlalchemy.ext.declarative import declarative_base
@@ -8,6 +9,7 @@ from sqlalchemy.orm import sessionmaker, Session, relationship
 
 Base = declarative_base()
 metadata = MetaData()
+load_dotenv()
 DATABASE_URL = os.getenv('PGSQL_ENGINE_URL')
 
 #

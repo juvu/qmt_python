@@ -12,6 +12,8 @@ import easyquotation
 
 import logging
 
+from dotenv import load_dotenv
+
 logging.basicConfig(
     level=logging.NOTSET,
     filename='./default.log'
@@ -39,6 +41,7 @@ def print_(str):
     logging.log(logging.INFO, str)
 
 
+load_dotenv()
 engine = create_engine(os.getenv('PGSQL_ENGINE_URL'))
 
 
