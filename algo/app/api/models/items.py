@@ -13,12 +13,12 @@ import os
 
 from sqlalchemy import and_
 
-from algo.app.db import pgsql
-from algo.app.db.pgsql import tjItem, WaitBuyList
+from app.db import pgsql
+from app.db.pgsql import tjItem, WaitBuyList
 
 import easyquotation
 
-from algo.app.util.utils import gp_type_szsh
+from app.util.utils import gp_type_szsh
 
 quotation = easyquotation.use('tencent')  # 新浪 ['sina'] 腾讯 ['tencent', 'qq']
 
