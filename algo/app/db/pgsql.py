@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, ForeignKey, DateTime
@@ -7,8 +8,7 @@ from sqlalchemy.orm import sessionmaker, Session, relationship
 
 Base = declarative_base()
 metadata = MetaData()
-DATABASE_URL = 'postgresql://postgres:dirtydan@120.26.202.151:5432/demo1'
-
+DATABASE_URL = os.getenv('PGSQL_ENGINE_URL')
 
 #
 
