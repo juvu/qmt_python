@@ -13,6 +13,7 @@ import qstock as qs
 # https://zhuanlan.zhihu.com/p/659430613
 import efinance as ef
 import requests
+from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import traceback
@@ -33,6 +34,7 @@ from fastapi.staticfiles import StaticFiles
 
 from api.endpoints import items, users
 
+load_dotenv()
 logging.basicConfig(
     level=logging.NOTSET,
     filename='default.log'
@@ -129,13 +131,14 @@ def download_png_csv():
                 # print('文件：')
                 for file in files:
                     # print(os.path.join(root, file))
-                    code_list.append(file.split(".")[0][-2:].lower()+file.split(".")[0][:-2])
+                    code_list.append(file.split(".")[0][-2:].lower() + file.split(".")[0][:-2])
                 if code_list:
                     # print(quotation.stocks(code_list, prefix=True))
                     res = quotation.stocks(code_list, prefix=True)
                     for code in res.keys():
                         pd.DataFrame(res[code], index=[0]).to_csv(f'{os.path.join(root.replace("png", "csv"), code)}.csv', mode='a', header=True, index=False)
         t.sleep(60)
+
 
 def code_list_to_csv(code_list: list):
     """
@@ -385,20 +388,20 @@ def wencai_():
             # 市值小于50亿
             ideals = [
                 # '总市值大于等于20亿小于等于50亿,剔除ST,缩量,最近10个交易日有6个交易日以上主力资金净流入,最近3个交易日涨幅为正,资金净流入的股票,散户卖出,筹码高度集中,MACD大于0,最近3个交易日涨幅为正,rsi金叉，',
-                      '市值大于100亿,放量,剔除ST,剔除次新,剔除北交所,拉升通道,最近20日放量,最近3个交易日涨幅为正,',
-                      # '流通市值大于20亿元,市值小于100亿,散户持续卖出,放量,剔除ST,剔除次新,亿剔除次北交所,最近10个交易日有6个交易日以上主力资金净流入,最近3个交易日涨幅为正,rsi金叉',
-                      '市值大于100亿,放量,不包括次新股,剔除ST,剔除次新,亿剔除次北交所,股票市场不包括北交所,散户卖出,最近3个交易日涨幅为正,',
-                      # '机构净额大于500万,关注度高,近期热门板块,散户卖出,最近3个交易日涨幅为正,,',
-                      '市值大于100亿,亿剔除次新股,拉升通道,股票市场只包括创业板,MACD大于0,资金流入,最近20日放量,最近3个交易日涨幅为正,',
-                      '市值大于100亿,拉升通道,仅创业板,MACD大于0,筹码高度集中,资金流入,',
-                      'rsi金叉，总市值大于100亿，拉升通道,',
-                      'dde大单净额>100万，散户数量减少，量比>0.8，振幅>3%，流通市值大于等于20亿小于等于50亿，boll突破中轨，拉升通道',
-                      '20天内有过涨停，阳包阴，当日振幅前100，放量，上升通道，',
-                      # AI模型精选优质股
-                      # '小盘股(流通市值小于100亿),日线放量上涨,macd提示买入,近期大股东没有减持,',
-                      # '业绩预增大于20%,机构评级看多,近期大股东没有减持,',
-                      # '龙虎榜净买入,昨日放量上涨,短期趋势向上,近期大股东没有减持,',
-                      ]
+                '市值大于100亿,放量,剔除ST,剔除次新,剔除北交所,拉升通道,最近20日放量,最近3个交易日涨幅为正,',
+                # '流通市值大于20亿元,市值小于100亿,散户持续卖出,放量,剔除ST,剔除次新,亿剔除次北交所,最近10个交易日有6个交易日以上主力资金净流入,最近3个交易日涨幅为正,rsi金叉',
+                '市值大于100亿,放量,不包括次新股,剔除ST,剔除次新,亿剔除次北交所,股票市场不包括北交所,散户卖出,最近3个交易日涨幅为正,',
+                # '机构净额大于500万,关注度高,近期热门板块,散户卖出,最近3个交易日涨幅为正,,',
+                '市值大于100亿,亿剔除次新股,拉升通道,股票市场只包括创业板,MACD大于0,资金流入,最近20日放量,最近3个交易日涨幅为正,',
+                '市值大于100亿,拉升通道,仅创业板,MACD大于0,筹码高度集中,资金流入,',
+                'rsi金叉，总市值大于100亿，拉升通道,',
+                'dde大单净额>100万，散户数量减少，量比>0.8，振幅>3%，流通市值大于等于20亿小于等于50亿，boll突破中轨，拉升通道',
+                '20天内有过涨停，阳包阴，当日振幅前100，放量，上升通道，',
+                # AI模型精选优质股
+                # '小盘股(流通市值小于100亿),日线放量上涨,macd提示买入,近期大股东没有减持,',
+                # '业绩预增大于20%,机构评级看多,近期大股东没有减持,',
+                # '龙虎榜净买入,昨日放量上涨,短期趋势向上,近期大股东没有减持,',
+            ]
             sleep_time = 600
         current_time = datetime.now().time()
         time1 = time(9, 26)
@@ -407,8 +410,8 @@ def wencai_():
         time4 = time(15, 10)
         thread_list = []
         if time1 <= current_time <= time2 or time3 <= current_time <= time4:  # 程序9.26分-11.30分,13.00-15.10运行时间
-        # if time3 <= current_time <= time4:  # 程序9.26分-11.30分,13.00-15.10运行时间
-        # if True:            # 程序9.10分-11.30分,13.00-15.10运行时间
+            # if time3 <= current_time <= time4:  # 程序9.26分-11.30分,13.00-15.10运行时间
+            # if True:            # 程序9.10分-11.30分,13.00-15.10运行时间
             for ideal in ideals:
                 print_(ideal)
                 try:
@@ -463,6 +466,7 @@ def brain_analyse_SH():
     根据历史走势,近期热点板块,列入观察列表
     """
     pass
+
 
 def brain_analyse_block():
     """
@@ -671,8 +675,10 @@ def myAnalyse(message_queue):
 
 
 def start_uvicorn():
+    host = os.getenv("HOST")
+    port = int(os.getenv("PORT"))
     # 注意：这里的"main:app"意味着uvicorn会从main.py文件中寻找名为app的FastAPI实例
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
+    uvicorn.run(app, host=host, port=port, log_level="info", reload=True)
 
 
 def watch_data():
@@ -995,12 +1001,13 @@ def watch_data():
         ">3% 数量 比例": zd_gt3_ratio  # >3% 数量 比例
     }
 
+
 def watch_data_history():
     # 获取所有信息
     while True:
         try:
             watch_code_list = pgsql.get_db().query(WatchCode).all()
-            watch_code_list = [i.code.split(".")[-1].lower()+i.code.split(".")[0] for i in watch_code_list]
+            watch_code_list = [i.code.split(".")[-1].lower() + i.code.split(".")[0] for i in watch_code_list]
             all_info = pd.DataFrame(quotation.stocks(watch_code_list, prefix=True)).T
             # all_info[all_info['涨跌(%)']>1 & all_info['close']< all_info['open']]
             # all_info[(all_info['涨跌(%)'] > 1) & (all_info['close'] < all_info['open'])]
@@ -1012,17 +1019,18 @@ def watch_data_history():
             print(traceback.print_exc())
         t.sleep(600)
 
+
 if __name__ == '__main__':
     message_queue = queue.Queue()
     brain_thread_list = []
-    brain_thread_list.append(threading.Thread(target=brain_analyse_SH, args=()))           # 主力资金
-    brain_thread_list.append(threading.Thread(target=watch_data, args=()))                 # 监控数据
-    brain_thread_list.append(threading.Thread(target=watch_data_history, args=()))                 # 监控数据
-    brain_thread_list.append(threading.Thread(target=download_png_csv, args=()))           # 收集数据
-    brain_thread_list.append(threading.Thread(target=wencai_, args=()))             # 问财
-    brain_thread_list.append(threading.Thread(target=start_uvicorn, args=()))       # 启动web服务器 fastapi
+    # brain_thread_list.append(threading.Thread(target=brain_analyse_SH, args=()))           # 主力资金
+    # brain_thread_list.append(threading.Thread(target=watch_data, args=()))                 # 监控数据
+    # brain_thread_list.append(threading.Thread(target=watch_data_history, args=()))                 # 监控数据
+    # brain_thread_list.append(threading.Thread(target=download_png_csv, args=()))           # 收集数据
+    # brain_thread_list.append(threading.Thread(target=wencai_, args=()))             # 问财
     # brain_thread_list.append(threading.Thread(target=myServer, args=("localhost", 8083,)))
     # brain_thread_list.append(threading.Thread(target=myAnalyse, args=(message_queue,)))
-
+    # brain_thread_list.append(threading.Thread(target=start_uvicorn, args=()))       # 启动web服务器 fastapi
+    start_uvicorn()
     for i in brain_thread_list:
         i.start()
