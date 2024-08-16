@@ -674,11 +674,6 @@ def myAnalyse(message_queue):
         t.sleep(100)
 
 
-def start_uvicorn():
-    host = os.getenv("HOST")
-    port = int(os.getenv("PORT"))
-    # 注意：这里的"main:app"意味着uvicorn会从main.py文件中寻找名为app的FastAPI实例
-    uvicorn.run(app, host=host, port=port, log_level="info", reload=True)
 
 
 def watch_data():
@@ -1019,7 +1014,8 @@ def watch_data_history():
             print(traceback.print_exc())
         t.sleep(600)
 
-
+host = os.getenv("HOST")
+port = int(os.getenv("PORT"))
 if __name__ == '__main__':
     message_queue = queue.Queue()
     brain_thread_list = []
@@ -1031,6 +1027,7 @@ if __name__ == '__main__':
     # brain_thread_list.append(threading.Thread(target=myServer, args=("localhost", 8083,)))
     # brain_thread_list.append(threading.Thread(target=myAnalyse, args=(message_queue,)))
     # brain_thread_list.append(threading.Thread(target=start_uvicorn, args=()))       # 启动web服务器 fastapi
-    start_uvicorn()
     for i in brain_thread_list:
         i.start()
+    # 注意：这里的"main:app"意味着uvicorn会从main.py文件中寻找名为app的FastAPI实例
+    uvicorn.run("main:app", host=host, port=port, log_level="info", reload=True)
