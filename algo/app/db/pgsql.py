@@ -4,8 +4,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, ForeignKey, DateTime
 # 使用SQLAlchemy的DeclarativeBase来定义模型
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, Session, relationship
+from sqlalchemy.orm import sessionmaker, Session, relationship, declarative_base
 
 Base = declarative_base()
 metadata = MetaData()
