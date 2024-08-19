@@ -59,5 +59,5 @@ wcwidth==0.2.13
 efinance==0.5.2
 python-dotenv==1.0.1
 easyquotation==0.7.5
-SQLAlchemy==2.0.32
+SQLAlchemy==2.0.20
 psycopg2==2.9.9
