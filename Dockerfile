@@ -8,7 +8,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 # 安装Python依赖
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt -i https://pypi.doubanio.com/simple/
 
 # 复制项目代码到容器中
 COPY . .
