@@ -49,6 +49,7 @@ sniffio==1.3.1
 soupsieve==2.5
 starlette==0.36.3
 statsmodels==0.14.1
+selenium==4.12.0
 tenacity==8.2.3
 tqdm==4.66.2
 typing_extensions==4.10.0
@@ -60,5 +61,4 @@ efinance==0.5.2
 python-dotenv==1.0.1
 easyquotation==0.7.5
 SQLAlchemy==2.0.20
-psycopg2==2.9.9
-libpq==12.17
+psycopg2-binary==2.9.9
