@@ -36,7 +36,7 @@ import logging
 
 from fastapi.staticfiles import StaticFiles
 
-from api.endpoints import items, users
+from api.routers import stock_strategy, users
 
 load_dotenv()
 logging.basicConfig(
@@ -48,7 +48,7 @@ wc_cookie = 'other_uid=Ths_iwencai_Xuangu_vt1m3hjjud764awfezv3ezly4t2f9xco; ta_r
 
 app = FastAPI()
 app.include_router(users.router)
-app.include_router(items.router)
+app.include_router(stock_strategy.router)
 app.mount("/files", StaticFiles(directory="files"), name="static")
 public_obj = {'code_list': [],
               }
