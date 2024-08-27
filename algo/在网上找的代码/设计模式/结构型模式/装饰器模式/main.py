@@ -1,7 +1,7 @@
 '''
 Date: 2024-08-27 13:50:41
 LastEditors: 牛智超
-LastEditTime: 2024-08-27 13:52:36
+LastEditTime: 2024-08-27 15:38:39
 FilePath: \国金项目\algo\在网上找的代码\设计模式\结构型模式\装饰器模式\main.py
 '''
 # 抽象组件
@@ -19,10 +19,12 @@ class PlainTextMessage(Message):
 
     def get_message(self):
         return self.message
+    
 # 抽象装饰器
 class MessageDecorator(Message):
     def __init__(self, message):
         self._message = message
+        
 # 具体装饰器
 class BoldMessageDecorator(MessageDecorator):
     def get_message(self):

@@ -1,131 +1,65 @@
-'''
-Date: 2024-08-27 14:39:15
-LastEditors: 牛智超
-LastEditTime: 2024-08-27 14:44:14
-FilePath: \国金项目\algo\在网上找的代码\设计模式\行为型模式\命令模式\main.py
-'''
-'''
-Date: 2024-08-27 14:39:15
-LastEditors: 牛智超
-LastEditTime: 2024-08-27 14:39:47
-FilePath: \国金项目\algo\在网上找的代码\设计模式\行为型模式\命令模式\main.py
-'''
-# 命令接口
+# 抽象类
 from abc import ABC, abstractmethod
 
-class Command(ABC):
+class GameTask(ABC):
+    def template_method(self):
+        self.step_one()
+        self.step_two()
+        self.step_three()
+        self.hook_method()
+
     @abstractmethod
-    def execute(self):
+    def step_one(self):
         pass
 
     @abstractmethod
-    def undo(self):
+    def step_two(self):
         pass
 
-# 接收者
-class Light:
-    def turn_on(self):
-        print("Light turned on.")
+    @abstractmethod
+    def step_three(self):
+        pass
 
-    def turn_off(self):
-        print("Light turned off.")
+    def hook_method(self):
+        pass
+    
+# 具体子类
+class CollectTreasureTask(GameTask):
+    def step_one(self):
+        print("Locate the treasure map.")
 
-class Fan:
-    def high_speed(self):
-        print("Fan running at high speed.")
+    def step_two(self):
+        print("Follow the map to the treasure location.")
 
-    def low_speed(self):
-        print("Fan running at low speed.")
+    def step_three(self):
+        print("Collect the treasure.")
+
+    def hook_method(self):
+        print("Check for traps before collecting the treasure.")
+
+
+class RescuePrincessTask(GameTask):
+    def step_one(self):
+        print("Find the castle.")
+
+    def step_two(self):
+        print("Sneak past the guards.")
+
+    def step_three(self):
+        print("Rescue the princess.")
+
+    def hook_method(self):
+        print("Make sure the princess is safe before leaving the castle.")
         
-# 具体命令
-class LightOnCommand(Command):
-    def __init__(self, light: Light):
-        self.light = light
-
-    def execute(self):
-        self.light.turn_on()
-
-    def undo(self):
-        self.light.turn_off()
-
-class LightOffCommand(Command):
-    def __init__(self, light: Light):
-        self.light = light
-
-    def execute(self):
-        self.light.turn_off()
-
-    def undo(self):
-        self.light.turn_on()
-
-class FanHighSpeedCommand(Command):
-    def __init__(self, fan: Fan):
-        self.fan = fan
-
-    def execute(self):
-        self.fan.high_speed()
-
-    def undo(self):
-        self.fan.low_speed()
-
-class FanLowSpeedCommand(Command):
-    def __init__(self, fan: Fan):
-        self.fan = fan
-
-    def execute(self):
-        self.fan.low_speed()
-
-    def undo(self):
-        self.fan.high_speed()
-        
-# 调用者
-class RemoteControlWithUndo:
-    def __init__(self):
-        self.on_commands = []
-        self.off_commands = []
-        self.undo_command = None
-
-    def set_command(self, on_command: Command, off_command: Command):
-        self.on_commands.append(on_command)
-        self.off_commands.append(off_command)
-
-    def on_button_was_pushed(self, slot):
-        self.on_commands[slot].execute()
-        self.undo_command = self.on_commands[slot]
-
-    def off_button_was_pushed(self, slot):
-        self.off_commands[slot].execute()
-        self.undo_command = self.off_commands[slot]
-
-    def undo_button_was_pushed(self):
-        if self.undo_command:
-            self.undo_command.undo()
-            
-# 使用命令模式
+# 使用模板方法模式
 def main():
-    remote_control = RemoteControlWithUndo()
+    collect_treasure_task = CollectTreasureTask()
+    rescue_princess_task = RescuePrincessTask()
 
-    light = Light()
-    fan = Fan()
-
-    light_on = LightOnCommand(light)
-    light_off = LightOffCommand(light)
-
-    fan_high_speed = FanHighSpeedCommand(fan)
-    fan_low_speed = FanLowSpeedCommand(fan)
-
-    remote_control.set_command(light_on, light_off)
-    remote_control.set_command(fan_high_speed, fan_low_speed)
-
-    # 模拟按下按钮
-    remote_control.on_button_was_pushed(0)  # 开灯
-    remote_control.off_button_was_pushed(0)  # 关灯
-    remote_control.on_button_was_pushed(1)  # 风扇高速
-    remote_control.off_button_was_pushed(1)  # 风扇低速
-
-    # 模拟按下撤销按钮
-    remote_control.undo_button_was_pushed()  # 撤销上一步，恢复风扇高速
-    remote_control.undo_button_was_pushed()  # 撤销上一步，恢复关灯
+    print("Collecting Treasure Task:")
+    collect_treasure_task.template_method()
+    print("\nRescuing Princess Task:")
+    rescue_princess_task.template_method()
 
 if __name__ == "__main__":
     main()
