@@ -157,6 +157,8 @@ async def sell(request: SellItem):
         account['m_dAvailable'] = a.m_dAvailable
         account['m_dPositionProfit'] = a.m_dPositionProfit
     # 计算是否卖出
+    if len(positions) == 0:
+        return return_res
     code = [i for i in [gp_type_szsh(positions[0].m_strInstrumentID).split(".")[1].lower() + gp_type_szsh(positions[0].m_strInstrumentID).split(".")[0]]]
     # info_set = quotation.stocks(gp_type_szsh(positions[0].m_strInstrumentID), prefix=True)
     info_set = quotation.stocks(code, prefix=True)
