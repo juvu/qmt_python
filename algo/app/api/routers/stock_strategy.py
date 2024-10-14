@@ -23,7 +23,7 @@ from app.db.pgsql import tjItem, WatchCode, WaitBuyList
 import easyquotation
 
 from app.util.utils import gp_type_szsh
-
+import pywencai as wc
 quotation = easyquotation.use('tencent')  # 新浪 ['sina'] 腾讯 ['tencent', 'qq']
 
 router = APIRouter(
@@ -421,18 +421,20 @@ def market_data():
 
 @router.get("/tsgp")
 async def tsgp():
-    BASE_URL = "http://0.0.0.0:8000"
-    files = list_log_files()
-    files.sort()
-    filename = files[-1]
-    file_url = f"{BASE_URL}/files/{filename}"
-    filepath = os.path.join(os.getcwd(), "files", filename)
-    if os.path.isfile(filepath):
-        # return FileResponse(filepath, filename=file_url)
-        return file_url
-    else:
-        raise HTTPException(status_code=404, detail="File not found")
-
+    res = wc.get(query='9:20之前的竞价出现涨跌停价挂单加分,剔除ST')
+    # BASE_URL = "http://0.0.0.0:8000"
+    # files = list_log_files()
+    # files.sort()
+    # filename = files[-1]
+    # file_url = f"{BASE_URL}/files/{filename}"
+    # filepath = os.path.join(os.getcwd(), "files", filename)
+    # if os.path.isfile(filepath):
+    #     # return FileResponse(filepath, filename=file_url)
+    #     return file_url
+    # else:
+    #     raise HTTPException(status_code=404, detail="File not found")
+    print(res)
+    return res.to_dict()
 @router.get("/stock_list")
 async def stock_list():
     BASE_URL = "http://0.0.0.0:8000"

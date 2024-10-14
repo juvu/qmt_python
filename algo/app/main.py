@@ -1,6 +1,9 @@
 from datetime import datetime, timedelta, time
 import os
 import sys
+
+from starlette.middleware.cors import CORSMiddleware
+
 # 获取当前文件的目录路径并添加到 sys.path
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.abspath(os.path.join(current_dir, os.pardir))
@@ -47,6 +50,16 @@ logging.basicConfig(
 wc_cookie = 'other_uid=Ths_iwencai_Xuangu_vt1m3hjjud764awfezv3ezly4t2f9xco; ta_random_userid=38r3s4iaao; PHPSESSID=670fb84a8754b3555e226c6b40c1d831; cid=670fb84a8754b3555e226c6b40c1d8311712721082; ComputerID=670fb84a8754b3555e226c6b40c1d8311712721082; WafStatus=0; u_ukey=A10702B8689642C6BE607730E11E6E4A; u_uver=1.0.0; u_dpass=HDZXnLqPSJ%2FMpvbRfnHhizBr0Y9TGLpA9wXLLjwsvQ09AWJ2DoZsyKUcGwEmAARD%2FsBAGfA5tlbuzYBqqcUNFA%3D%3D; u_did=ED35F01A88274FB59C3D3D607D30FEF0; u_ttype=WEB; ttype=WEB; user=MDptb181NjI3MjgwNzU6Ok5vbmU6NTAwOjU3MjcyODA3NTo3LDExMTExMTExMTExLDQwOzQ0LDExLDQwOzYsMSw0MDs1LDEsNDA7MSwxMDEsNDA7MiwxLDQwOzMsMSw0MDs1LDEsNDA7OCwwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMSw0MDsxMDIsMSw0MDoyNDo6OjU2MjcyODA3NToxNzEyNzIxMTIyOjo6MTYxMDkyNDk0MDo0MDAwNzg6MDoxNTljOTE4ODcwNDMzZjVlZDBhYTA5YWUzZWZiMDZhN2M6ZGVmYXVsdF80OjE%3D; userid=562728075; u_name=mo_562728075; escapename=mo_562728075; ticket=c35f5ff9817c2eee41b92f1a856ae0aa; user_status=0; utk=4261b365b2919c25775389e81aabe8e0; v=Az9jBtnQZWCRhWF8zdmzVs3XzhjMJJPPrXiXutEM2-414FHG2fQjFr1IJwbi'
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://127.0.0.1",
+        "http://127.0.0.1:8080"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.include_router(users.router)
 app.include_router(stock_strategy.router)
 app.mount("/files", StaticFiles(directory="files"), name="static")
@@ -385,7 +398,7 @@ def wencai_():
     while True:
         if start_time <= current_time <= end_time:
             ideals = ['9:20之前的竞价出现涨跌停价挂单加分,剔除ST',
-                      '9:20~9:25期间,撮合价格逐步走高,同时伴随着成交量的放大,且以密集红柱为主。最好在最后一两分钟内 有快速拉高(大资金强吃货),且最终竞价涨幅在3%~7%之间',
+                      '9:20~9:25期间,撮合价格逐步走高,同时伴随着成交量的放大,且以密集红柱为主。最后两分钟内大资金强吃货,且最终竞价涨幅在3%~7%之间，剔除ST',
                       '9:30前,有巨单挂过涨跌停价,个股形态完好,前几日分时有过异动或者有过涨停,开始股价涨停 ,竞价过程中撮合价格慢慢走低,但成交量有效放大,并且承接很好,主买盘为主', ]
             sleep_time = 60
         else:
@@ -1030,8 +1043,7 @@ if __name__ == '__main__':
     # brain_thread_list.append(threading.Thread(target=wencai_, args=()))             # 问财
     # brain_thread_list.append(threading.Thread(target=myServer, args=("localhost", 8083,)))
     # brain_thread_list.append(threading.Thread(target=myAnalyse, args=(message_queue,)))
-    # brain_thread_list.append(threading.Thread(target=start_uvicorn, args=()))       # 启动web服务器 fastapi
     for i in brain_thread_list:
         i.start()
     # 注意：这里的"main:app"意味着uvicorn会从main.py文件中寻找名为app的FastAPI实例
-    uvicorn.run("main:app", host=host, port=port, log_level="info", reload=True)
+    uvicorn.run("main:app", host=host, port=port, log_level="info", reload=True)            # 启动web服务器 fastapi
